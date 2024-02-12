@@ -36,8 +36,14 @@ async function main() {
 
   try {
     console.log("Creating style.css ...");
-    // console.log(projectPath+'./style.css');
-    fs.writeFileSync("./style.css", 'Hey there!');
+    fs.writeFileSync("./style.css", '/* CSS File */');
+  } catch (err) {
+    console.log(error);
+  }
+
+  try {
+    console.log("Creating functions.php ...");
+    fs.writeFileSync("./functions.php", '/* PHP File */');
   } catch (err) {
     console.log(error);
   }
