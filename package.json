@@ -12,6 +12,6 @@
     "gulp": "^4.0.2"
   },
   "bin": {
-    "create-brix-theme": "./generate-theme.js"
+    "create-brix-theme": "./create-brix-theme.js"
   }
 }
