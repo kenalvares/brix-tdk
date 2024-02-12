@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "gulp": "^4.0.2"
+  },
+  "bin": {
+    "create-brix-theme": "./generate-theme.js"
   }
 }
