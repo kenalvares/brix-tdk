@@ -1,0 +1,14 @@
+{
+  "name": "brix-tdk",
+  "version": "1.0.0",
+  "description": "A modular Theme Development Kit (TDK)  for WordPress themes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kenneth Alvares",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
