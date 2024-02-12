@@ -43,7 +43,7 @@ async function main() {
 
   try {
     console.log("Creating functions.php ...");
-    fs.writeFileSync("./functions.php", '/* PHP File */');
+    fs.writeFileSync("./functions.php", '// PHP File');
   } catch (err) {
     console.log(error);
   }
