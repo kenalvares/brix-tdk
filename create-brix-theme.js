@@ -1,72 +1,94 @@
 #!/usr/bin/env node
 
+console.log("Create Brix Theme\n------");
+
 const path = require("path");
 const fs = require("fs");
 const slug = require("lodash");
 
-
 if (process.argv.length < 3 || process.argv.length > 3) {
-    console.log(
-      "Please only enter a single theme name like:\n\t\tnpx create-brix-theme myThemeName\n\t\tnpx create-brix-theme my-theme-name"
-    );
-    process.exit(1);
-  }
+  console.log(
+    "(!) Please only enter a name without spaces, or a spaced name inside double quotes like:"
+  );
+  console.log("\t\tnpx create-brix-theme myThemeName");
+  console.log('\n\t\tnpx create-brix-theme "My Theme Name"');
+  process.exit(1);
+}
 
 const projectName = process.argv[2];
 process.chdir("..");
 const currentPath = process.cwd();
 const projectPath = path.join(currentPath, projectName);
 
-async function main() {
-
+function createThemeFolder(name, dir) {
   try {
-    console.log("Creating theme folder...");
-    fs.mkdirSync(projectPath);
-    console.log("Created /" + projectPath);
-    process.chdir(projectPath);
+    console.log("\n* Creating theme folder");
+    fs.mkdirSync(dir);
+    console.log("\t- Successfully created /" + dir);
+    process.chdir(dir);
   } catch (err) {
     if (err.code === "EEXIST") {
       console.log(
-        `/${projectName} already exists in the current directory, please give your theme another name.`
+        `(!) '${name}' already exists in the current directory, please give your theme another name.`
       );
     } else {
       console.log(err);
     }
     process.exit(1);
   }
+}
 
+function createConfig() {
   try {
-    console.log("Creating config folder...");
+    console.log("\n* Creating /config folder");
     fs.mkdirSync("./config");
+    console.log("\t- Successfully created /config");
   } catch (err) {
     console.log(err);
   }
 
   try {
-    console.log("Creating config folder...");
+    console.log("\n* Creating theme.json");
     fs.writeFileSync("./config/theme.json", JSON.stringify("{ test: 'foo' }"));
+    console.log("\t- Successfully created theme.json");
   } catch (err) {
     console.log(err);
   }
+}
 
-  // try {
-  //   console.log("Creating style.css ...");
-  //   fs.writeFileSync("./style.css", "/* CSS File */");
-  // } catch (err) {
-  //   console.log(err);
-  // }
+function createStyles() {
+  try {
+    console.log("\n* Creating style.css");
+    fs.writeFileSync("./style.css", "/* CSS File */");
+    console.log("\t- Successfully created style.css");
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-  // try {
-  //   console.log("Creating functions.php ...");
-  //   fs.writeFileSync("./functions.php", "// PHP File");
-  // } catch (err) {
-  //   console.log(err);
-  // }
+function createFunctions() {
+  try {
+    console.log("\n* Creating functions.php");
+    fs.writeFileSync("./functions.php", "// PHP File");
+    console.log("\t- Successfully created functions.php");
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function main() {
+  createThemeFolder(projectName, projectPath);
+
+  createConfig();
+
+  createStyles();
+
+  createFunctions();
 
   try {
-    console.log("Moving to theme...");
+    console.log("\n* Moving to theme...");
     process.chdir(projectPath);
-    console.log("Your Brix Theme is ready for use!");
+    console.log("\n* Your Brix Theme is ready for use!");
   } catch (error) {
     console.log(error);
   }
