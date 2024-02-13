@@ -2,6 +2,7 @@
 
 const path = require("path");
 const fs = require("fs");
+const slug = require("lodash");
 
 
 if (process.argv.length < 3 || process.argv.length > 3) {
@@ -29,30 +30,42 @@ async function main() {
         `/${projectName} already exists in the current directory, please give your theme another name.`
       );
     } else {
-      console.log(error);
+      console.log(err);
     }
     process.exit(1);
   }
 
   try {
-    console.log("Creating style.css ...");
-    fs.writeFileSync("./style.css", '/* CSS File */');
+    console.log("Creating config folder...");
+    fs.mkdirSync("./config");
   } catch (err) {
-    console.log(error);
+    console.log(err);
   }
 
   try {
-    console.log("Creating functions.php ...");
-    fs.writeFileSync("./functions.php", '// PHP File');
+    console.log("Creating config folder...");
+    fs.writeFileSync("./config/theme.json", JSON.stringify("{ test: 'foo' }"));
   } catch (err) {
-    console.log(error);
+    console.log(err);
   }
+
+  // try {
+  //   console.log("Creating style.css ...");
+  //   fs.writeFileSync("./style.css", "/* CSS File */");
+  // } catch (err) {
+  //   console.log(err);
+  // }
+
+  // try {
+  //   console.log("Creating functions.php ...");
+  //   fs.writeFileSync("./functions.php", "// PHP File");
+  // } catch (err) {
+  //   console.log(err);
+  // }
 
   try {
     console.log("Moving to theme...");
-
     process.chdir(projectPath);
-
     console.log("Your Brix Theme is ready for use!");
   } catch (error) {
     console.log(error);

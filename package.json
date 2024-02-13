@@ -13,5 +13,8 @@
   },
   "bin": {
     "create-brix-theme": "./create-brix-theme.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
