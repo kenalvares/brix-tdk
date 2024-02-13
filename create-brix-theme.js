@@ -5,6 +5,7 @@ console.log("Create Brix Theme\n------");
 const path = require("path");
 const fs = require("fs");
 const slug = require("lodash");
+const prompt = require('prompt-sync')({sigint: true});
 let theme = {};
 
 if (process.argv.length < 3 || process.argv.length > 3) {
@@ -22,8 +23,18 @@ const projectPath = path.join(currentPath, projectName);
 theme.name = projectName;
 theme.slug = slug.kebabCase(projectName);
 
+theme.uri = prompt("\n* Enter your Theme URL: ");
+theme.author = prompt("\n* Enter Author Name: ");
+theme.author_uri = prompt("\nEnter Author URL: ");
+theme.description = prompt("\nEnter Theme Description: ");
+theme.version = "1.0.0";
+theme.requires_wp = prompt("\nEnter minimum WordPress version requied: ");
+theme.tested_wp = prompt("\nEnter last WordPress version tested: ");
+theme.requires_php = prompt("\nEnter minimum PHP version required: ");
+theme.license = prompt("\nEnter License Name: ");
+theme.license_uri = prompt("\nEnter License URI: ");
 
-let styleCss = `/*\nTheme Name: ${theme.name}\nTheme URI: \nAuthor: \nAuthor URI: \nDescription: \nVersion: \nRequires at least: 5.0\nTested up to: 6.4.3\nRequires PHP: 7.0\nLicense: GNU General Public License v2 or later\nLicense URI: http://www.gnu.org/licenses/gpl-2.0.html\nText Domain: ${theme.slug}\nThis theme is powered by the Brix Theme Development Kit (TDK)\n*/`;
+let styleCss = `/*\nTheme Name: ${theme.name}\nTheme URI: ${theme.uri}\nAuthor: ${theme.author}\nAuthor URI: ${theme.author_uri}\nDescription: ${theme.description}\nVersion: ${theme.version}\nRequires at least: ${theme.requires_wp}\nTested up to: ${theme.tested_wp}\nRequires PHP: ${theme.requires_php}\nLicense: ${theme.license}\nLicense URI: ${theme.license_uri}\nText Domain: ${theme.slug}\nThis theme is powered by the Brix Theme Development Kit (TDK)\n*/`;
 
 function createThemeFolder(name, dir) {
   try {
