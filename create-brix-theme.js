@@ -22,7 +22,8 @@ const projectPath = path.join(currentPath, projectName);
 theme.name = projectName;
 theme.slug = slug.kebabCase(projectName);
 
-console.log(theme);
+
+let styleCss = `/*\nTheme Name: ${theme.name}\nTheme URI: \nAuthor: \nAuthor URI: \nDescription: \nVersion: \nRequires at least: 5.0\nTested up to: 6.4.3\nRequires PHP: 7.0\nLicense: GNU General Public License v2 or later\nLicense URI: http://www.gnu.org/licenses/gpl-2.0.html\nText Domain: ${theme.slug}\nThis theme is powered by the Brix Theme Development Kit (TDK)\n*/`;
 
 function createThemeFolder(name, dir) {
   try {
@@ -63,7 +64,7 @@ function createConfig() {
 function createStyles() {
   try {
     console.log("\n* Creating style.css");
-    fs.writeFileSync("./style.css", "/* CSS File */");
+    fs.writeFileSync("./style.css", styleCss);
     console.log("\t- Successfully created style.css");
   } catch (err) {
     console.log(err);
