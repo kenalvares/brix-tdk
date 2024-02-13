@@ -5,11 +5,10 @@ console.log("Create Brix Theme\n------");
 const path = require("path");
 const fs = require("fs");
 const slug = require("lodash");
+let theme = {};
 
 if (process.argv.length < 3 || process.argv.length > 3) {
-  console.log(
-    "(!) Please only enter a name without spaces, or a spaced name inside double quotes like:"
-  );
+  console.log("(!) Please only enter a name without spaces or a name with spaces inside double quotes like:");
   console.log("\t\tnpx create-brix-theme myThemeName");
   console.log('\n\t\tnpx create-brix-theme "My Theme Name"');
   process.exit(1);
@@ -19,6 +18,11 @@ const projectName = process.argv[2];
 process.chdir("..");
 const currentPath = process.cwd();
 const projectPath = path.join(currentPath, projectName);
+
+theme.name = projectName;
+theme.slug = slug.kebabCase(projectName);
+
+console.log(theme);
 
 function createThemeFolder(name, dir) {
   try {
@@ -49,7 +53,7 @@ function createConfig() {
 
   try {
     console.log("\n* Creating theme.json");
-    fs.writeFileSync("./config/theme.json", JSON.stringify("{ test: 'foo' }"));
+    fs.writeFileSync("./config/theme.json", JSON.stringify(theme));
     console.log("\t- Successfully created theme.json");
   } catch (err) {
     console.log(err);
