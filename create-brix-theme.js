@@ -164,7 +164,7 @@ function getStylesheetHeader(obj) {
 */\n\n`;
 }
 
-function getMainStyleContent() {
+function getMainStyles() {
   return `/*--------------------------------------------------------------
   >>> TABLE OF CONTENTS:
   ----------------------------------------------------------------
@@ -1112,7 +1112,7 @@ function getMainStyleContent() {
   }`;
 }
 
-function getRtlStyleContent() {
+function getRtlStyles() {
   return `/*--------------------------------------------------------------
   >>> TABLE OF CONTENTS:
   ----------------------------------------------------------------
@@ -2053,27 +2053,17 @@ function getRtlStyleContent() {
 }
 
 // Creates style.css
-function createStyles(head, mainStyle, rtlStyle) {
-  let mainStr = head.concat(mainStyle);  
-  let rtlStr = head.concat(rtlStyle);
+function createFile(name, format, content) {
   try {
-    console.log("\n* Creating style.css");
-    fs.writeFileSync("./style.css", mainStr);
-    console.log("\t- Successfully created style.css");
-  } catch (err) {
-    console.log(err);
-  }
-  
-  try {
-    console.log("\n* Creating style-rtl.css");
-    fs.writeFileSync("./style-rtl.css", rtlStr);
-    console.log("\t- Successfully created style-rtl.css");
+    console.log(`\n* Creating name.${format}`);
+    fs.writeFileSync(`./${name}.${format}`, content);
+    console.log(`\t- Successfully created ${name}.${format}`);
   } catch (err) {
     console.log(err);
   }
 }
 
-function getFunctionsPhpContent(obj) {
+function getFunctionsContent(obj) {
   return `<?php
   /**
    * ${obj.themeName} functions and definitions
@@ -2261,17 +2251,6 @@ function getFunctionsPhpContent(obj) {
 `;
 }
 
-// Creates function.php
-function createFunctions(str) {
-  try {
-    console.log("\n* Creating functions.php");
-    fs.writeFileSync("./functions.php", str);
-    console.log("\t- Successfully created functions.php");
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 // Main function
 function main() {
   brixConfig.themeName = getThemeName();
@@ -2292,12 +2271,16 @@ function main() {
 
   createConfig(brixConfig);
 
-  createStyles(getStylesheetHeader(brixConfig), getMainStyleContent(), getRtlStyleContent());
+  createStyles(getStylesheetHeader(brixConfig), getMainStyles(), getRtlStyles());
 
-  createFunctions(getFunctionsPhpContent(brixConfig));
+  createFile("style", "css", getStylesheetHeader(brixConfig).concat(getMainStyles()));
+
+  createFile("style-rtl", "css", getStylesheetHeader(brixConfig).concat(getRtlStyles()));
+
+  createFile("functions", "php", getFunctionsContent(brixConfig));
 
   try {
-    console.log(`\n* Your Brix Theme is ready for use!\n    Try 'cd ${themePath}'`);
+    console.log(`\n* Your Brix Theme is ready for use!\nTry 'cd ${themePath}'`);
   } catch (error) {
     console.log(error);
   }
