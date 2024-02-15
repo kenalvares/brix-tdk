@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const slug = require("lodash");
 const prompt = require("prompt-sync")({ sigint: true });
-let theme = {};
+let brixConfig = {};
 
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 function getProjectName() {
@@ -36,7 +36,7 @@ function getThemeUri() {
   let str = prompt("\n* Enter your Theme URL: ");
   str = removeWhiteSpaces(str);
   if(str.length <= 0 || str == "" || str == undefined || str == null) {
-    return ""
+    return "";
   }
   return str;
 }
@@ -51,7 +51,7 @@ function getAuthorUri() {
   let str = prompt("\nEnter Author URL: ");
   str = removeWhiteSpaces(str);
   if(str.length <= 0 || str == "" || str == undefined || str == null) {
-    return ""
+    return "";
   }
   return str;
 }
@@ -86,7 +86,7 @@ function getLicenseUri() {
   let str = prompt("\nEnter License URI: ");
   str = removeWhiteSpaces(str);
   if(str.length <= 0 || str == "" || str == undefined || str == null) {
-    return ""
+    return "";
   }
   return str;
 }
@@ -110,7 +110,7 @@ function createThemeFolder(name, dir) {
   }
 }
 
-// Creates config folder and theme.json to store config info
+// Creates config folder and brix-config.json to store config info
 function createConfig(obj) {
   try {
     console.log("\n* Creating /config folder");
@@ -121,15 +121,15 @@ function createConfig(obj) {
   }
 
   try {
-    console.log("\n* Creating theme.json");
-    fs.writeFileSync("./config/theme.json", JSON.stringify(obj));
-    console.log("    - Successfully created theme.json");
+    console.log("\n* Creating brix-config.json");
+    fs.writeFileSync("./config/brix-config.json", JSON.stringify(obj));
+    console.log("    - Successfully created brix-config.json");
   } catch (err) {
     console.log(err);
   }
 }
 
-// Parses `theme` object into stylesheet header for WordPress
+// Parses `brixConfig` object into stylesheet header for WordPress
 function getStylesheetContent(obj) {
   return `/*
   Theme Name: ${obj.name}
@@ -170,33 +170,32 @@ function createFunctions() {
   }
 }
 
-async function main() {
-  theme.name = getProjectName();
-  theme.slug = slug.kebabCase(theme.name);
-  theme.uri = getThemeUri();
-  theme.author = getAuthor();
-  theme.author_uri = getAuthorUri();
-  theme.description = getDescription();
-  theme.version = "1.0.0";
-  theme.required_wp = getRequiredWp();
-  theme.tested_wp = getTestedWp();
-  theme.required_php = getRequiredPhp();
-  theme.license = getLicense();
-  theme.license_uri = getLicenseUri();
-  const projectPath = getProjectPath(theme.name);
+// Main function
+function main() {
+  brixConfig.name = getProjectName();
+  brixConfig.slug = slug.kebabCase(brixConfig.name);
+  brixConfig.uri = getThemeUri();
+  brixConfig.author = getAuthor();
+  brixConfig.author_uri = getAuthorUri();
+  brixConfig.description = getDescription();
+  brixConfig.version = "1.0.0";
+  brixConfig.required_wp = getRequiredWp();
+  brixConfig.tested_wp = getTestedWp();
+  brixConfig.required_php = getRequiredPhp();
+  brixConfig.license = getLicense();
+  brixConfig.license_uri = getLicenseUri();
+  const projectPath = getProjectPath(brixConfig.name);
 
-  createThemeFolder(theme.name, projectPath);
+  createThemeFolder(brixConfig.name, projectPath);
 
-  createConfig(theme);
+  createConfig(brixConfig);
 
-  createStyles(getStylesheetContent(theme));
+  createStyles(getStylesheetContent(brixConfig));
 
   createFunctions();
 
   try {
-    console.log("\n* Moving to theme...");
-    process.chdir(projectPath);
-    console.log("\n* Your Brix Theme is ready for use!");
+    console.log(`\n* Your Brix Theme is ready for use!\n    Try 'cd ${projectPath}'`);
   } catch (error) {
     console.log(error);
   }
