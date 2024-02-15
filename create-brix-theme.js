@@ -6,6 +6,7 @@ const slug = require("lodash");
 const prompt = require("prompt-sync")({ sigint: true });
 let theme = {};
 
+// Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 function getProjectName() {
   if (process.argv.length < 3 || process.argv.length > 3) {
     console.log(
@@ -19,15 +20,18 @@ function getProjectName() {
   }
 }
 
+// Removes all whitespaces in a string
 function removeWhiteSpaces(str) {
   return str.replace(/\s+/g, '');
 }
 
+// Returns the path to the newly generated theme
 function getProjectPath(str) {
   process.chdir("..");
   return path.join(process.cwd(), str);
 }
 
+// Returns Theme URI after basic formatting and validation
 function getThemeUri() {
   let str = prompt("\n* Enter your Theme URL: ");
   str = removeWhiteSpaces(str);
@@ -37,10 +41,12 @@ function getThemeUri() {
   return str;
 }
 
+// Returns Author Name
 function getAuthor() {
   return prompt("\n* Enter Author Name: ");
 }
 
+// Returns Author URI after basic formatting and validation
 function getAuthorUri() {
   let str = prompt("\nEnter Author URL: ");
   str = removeWhiteSpaces(str);
@@ -50,26 +56,32 @@ function getAuthorUri() {
   return str;
 }
 
+// Returns Description
 function getDescription() {
   return prompt("\nEnter Theme Description: ");
 }
 
+// Returns minimum required version of WordPress
 function getRequiredWp() {
   return prompt("\nEnter minimum WordPress version requied: ");
 }
 
+// Returns maximum tested version of WordPress
 function getTestedWp() {
   return prompt("\nEnter last WordPress version tested: ");
 }
 
+// Returns minimum required version of PHP
 function getRequiredPhp() {
   return prompt("\nEnter minimum PHP version required: ");
 }
 
+// Returns License Name
 function getLicense() {
   return prompt("\nEnter License Name: ");
 }
 
+// Returns License URI after basic formatting and validation
 function getLicenseUri() {
   let str = prompt("\nEnter License URI: ");
   str = removeWhiteSpaces(str);
@@ -79,6 +91,7 @@ function getLicenseUri() {
   return str;
 }
 
+// Creates parent theme folder after basic formatting and validation
 function createThemeFolder(name, dir) {
   try {
     console.log("\n* Creating theme folder");
@@ -97,6 +110,7 @@ function createThemeFolder(name, dir) {
   }
 }
 
+// Creates config folder and theme.json to store config info
 function createConfig(obj) {
   try {
     console.log("\n* Creating /config folder");
@@ -115,6 +129,7 @@ function createConfig(obj) {
   }
 }
 
+// Parses `theme` object into stylesheet header for WordPress
 function getStylesheetContent(obj) {
   return `/*
   Theme Name: ${obj.name}
@@ -133,6 +148,7 @@ function getStylesheetContent(obj) {
 */`;
 }
 
+// Creates style.css
 function createStyles(str) {
   try {
     console.log("\n* Creating style.css");
@@ -143,6 +159,7 @@ function createStyles(str) {
   }
 }
 
+// Creates function.php
 function createFunctions() {
   try {
     console.log("\n* Creating functions.php");
