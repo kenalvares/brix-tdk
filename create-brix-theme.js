@@ -2238,7 +2238,7 @@ const getIndexContent = obj => {
    *
    * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
    *
-   * @package ${obj.slug}
+   * @package ${obj.themeSlug}
    */
   
   get_header();
@@ -2303,19 +2303,23 @@ const main = () => {
   brixConfig.themeLicenseName = getThemeLicenseName();
   brixConfig.themeLicenseUri = getThemeLicenseUri();
 
+  brixConfig.initialContent = {};
+  brixConfig.initialContent.style = getStylesheetHeader(brixConfig).concat(getMainStyles());
+  brixConfig.initialContent.styleRtl = getStylesheetHeader(brixConfig).concat(getRtlStyles());
+  brixConfig.initialContent.functions = getFunctionsContent(brixConfig);
+  brixConfig.initialContent.index = getIndexContent(brixConfig);
+
   createThemeFolder(brixConfig.themeName, themePath);
 
   createConfig(brixConfig);
 
-  createStyles(getStylesheetHeader(brixConfig), getMainStyles(), getRtlStyles());
+  createFile("style", "css", brixConfig.initialContent.style);
 
-  createFile("style", "css", getStylesheetHeader(brixConfig).concat(getMainStyles()));
+  createFile("style-rtl", "css", brixConfig.initialContent.styleRtl);
 
-  createFile("style-rtl", "css", getStylesheetHeader(brixConfig).concat(getRtlStyles()));
-
-  createFile("functions", "php", getFunctionsContent(brixConfig));
+  createFile("functions", "php", brixConfig.initialContent.functions);
   
-  createFile("index", "php", getIndexContent(brixConfig));
+  createFile("index", "php", brixConfig.initialContent.index);
 
   try {
     console.log(`\n* Your Brix Theme is ready for use!\nTry 'cd ${themePath}'`);
