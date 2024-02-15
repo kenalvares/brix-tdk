@@ -3,12 +3,14 @@
 const path = require("path");
 const fs = require("fs");
 const slug = require("lodash");
-const prompt = require('prompt-sync')({sigint: true});
+const prompt = require("prompt-sync")({ sigint: true });
 let theme = {};
 
 function getProjectName() {
   if (process.argv.length < 3 || process.argv.length > 3) {
-    console.log("(!) Please only enter a name without spaces or a name with spaces inside double quotes like:");
+    console.log(
+      "(!) Please only enter a name without spaces or a name with spaces inside double quotes like:"
+    );
     console.log("    npx create-brix-theme myThemeName");
     console.log('    npx create-brix-theme "My Theme Name"');
     process.exit(1);
@@ -17,13 +19,22 @@ function getProjectName() {
   }
 }
 
+function removeWhiteSpaces(str) {
+  return str.replace(/\s+/g, '');
+}
+
 function getProjectPath(str) {
   process.chdir("..");
-  return path.join(process.cwd(), str)
+  return path.join(process.cwd(), str);
 }
 
 function getThemeUri() {
-  return prompt("\n* Enter your Theme URL: ");
+  let str = prompt("\n* Enter your Theme URL: ");
+  str = removeWhiteSpaces(str);
+  if(str.length <= 0 || str == "" || str == undefined || str == null) {
+    return ""
+  }
+  return str;
 }
 
 function getAuthor() {
@@ -31,7 +42,12 @@ function getAuthor() {
 }
 
 function getAuthorUri() {
-  return prompt("\nEnter Author URL: ");
+  let str = prompt("\nEnter Author URL: ");
+  str = removeWhiteSpaces(str);
+  if(str.length <= 0 || str == "" || str == undefined || str == null) {
+    return ""
+  }
+  return str;
 }
 
 function getDescription() {
@@ -55,7 +71,12 @@ function getLicense() {
 }
 
 function getLicenseUri() {
-  return prompt("\nEnter License URI: ");
+  let str = prompt("\nEnter License URI: ");
+  str = removeWhiteSpaces(str);
+  if(str.length <= 0 || str == "" || str == undefined || str == null) {
+    return ""
+  }
+  return str;
 }
 
 function createThemeFolder(name, dir) {
@@ -94,29 +115,28 @@ function createConfig(obj) {
   }
 }
 
-function getStylesheetContent() {
+function getStylesheetContent(obj) {
   return `/*
-  Theme Name: ${theme.name}
-  Theme URI: ${theme.uri}
-  Author: ${theme.author}
-  Author URI: ${theme.author_uri}
-  Description: ${theme.description}
-  Version: ${theme.version}
-  Requires at least: ${theme.requires_wp}
-  Tested up to: ${theme.tested_wp}
-  Requires PHP: ${theme.requires_php}
-  License: ${theme.license}
-  License URI: ${theme.license_uri}
-  Text Domain: ${theme.slug}
+  Theme Name: ${obj.name}
+  Theme URI: ${obj.uri}
+  Author: ${obj.author}
+  Author URI: ${obj.author_uri}
+  Description: ${obj.description}
+  Version: ${obj.version}
+  Requires at least: ${obj.required_wp}
+  Tested up to: ${obj.tested_wp}
+  Requires PHP: ${obj.required_php}
+  License: ${obj.license}
+  License URI: ${obj.license_uri}
+  Text Domain: ${obj.slug}
   This theme is powered by the Brix Theme Development Kit (TDK)
 */`;
 }
 
-function createStyles() {
-  let styleCss = getStylesheetContent();
+function createStyles(str) {
   try {
     console.log("\n* Creating style.css");
-    fs.writeFileSync("./style.css", styleCss);
+    fs.writeFileSync("./style.css", str);
     console.log("\t- Successfully created style.css");
   } catch (err) {
     console.log(err);
@@ -147,12 +167,12 @@ async function main() {
   theme.license = getLicense();
   theme.license_uri = getLicenseUri();
   const projectPath = getProjectPath(theme.name);
-  
+
   createThemeFolder(theme.name, projectPath);
 
   createConfig(theme);
 
-  createStyles();
+  createStyles(getStylesheetContent(theme));
 
   createFunctions();
 
