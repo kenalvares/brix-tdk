@@ -19,20 +19,22 @@ const getThemeName = () => {
     process.chdir("..");
     return process.argv[2];
   }
-}
+};
 
 // Removes all whitespaces in a string
-const removeWhiteSpaces = str => str.replace(/\s+/g, '');
+const removeWhiteSpaces = (str) => str.replace(/\s+/g, "");
 
 // Returns the path to the newly generated theme
-const getThemePath = str => path.join(process.cwd(), str);
+const getThemePath = (str) => path.join(process.cwd(), str);
 
 // Returns Theme URI after basic formatting and validation
 const getThemeUri = () => {
   const str = removeWhiteSpaces(prompt("\n* Enter your Theme URL: "));
-  if(str.length <= 0 || str == "" || str == undefined || str == null) {return "";}
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "";
+  }
   return str;
-}
+};
 
 // Returns Author Name
 const getThemeAuthorName = () => prompt("\n* Enter Author Name: ");
@@ -40,47 +42,59 @@ const getThemeAuthorName = () => prompt("\n* Enter Author Name: ");
 // Returns Author URI after basic formatting and validation
 const getThemeAuthorUri = () => {
   const str = removeWhiteSpaces(prompt("\nEnter Author URL: "));
-  if(str.length <= 0 || str == "" || str == undefined || str == null) {return "";}
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "";
+  }
   return str;
-}
+};
 
 // Returns Description
 const getThemeDescription = () => prompt("\nEnter Theme Description: ");
 
 // Returns minimum required version of WordPress
 const getThemeRequiredWp = () => {
-  const str = prompt("\nEnter minimum WordPress version requied: ");
-  if(str.length <= 0 || str == "" || str == undefined || str == null) {return "5.4";}
+  const str = prompt("\nEnter minimum WordPress version required: ");
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "5.4";
+  }
   return str;
-}
+};
 
 // Returns maximum tested version of WordPress
 const getThemeTestedWp = () => {
   const str = prompt("\nEnter last WordPress version tested: ");
-  if(str.length <= 0 || str == "" || str == undefined || str == null) {return "5.4";}
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "5.4";
+  }
   return str;
-}
+};
 
 // Returns minimum required version of PHP
 const getThemeRequiredPhp = () => {
   const str = prompt("\nEnter minimum PHP version required: ");
-  if(str.length <= 0 || str == "" || str == undefined || str == null) {return "5.6";}
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "5.6";
+  }
   return str;
-}
+};
 
 // Returns License Name
 const getThemeLicenseName = () => {
   const str = prompt("\nEnter License Name: ");
-  if (str.length <= 0 || str == "" || str == undefined || str == null) {return "GNU General Public License v2 or later";}
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "GNU General Public License v2 or later";
+  }
   return str;
-}
+};
 
 // Returns License URI after basic formatting and validation
 const getThemeLicenseUri = () => {
   const str = removeWhiteSpaces(prompt("\nEnter License URI: "));
-  if(str.length <= 0 || str == "" || str == undefined || str == null) {return "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html";}
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html";
+  }
   return str;
-}
+};
 
 // Creates parent theme folder after basic formatting and validation
 const createThemeFolder = (name, dir) => {
@@ -99,10 +113,10 @@ const createThemeFolder = (name, dir) => {
     }
     process.exit(1);
   }
-}
+};
 
 // Creates config folder and brix-config.json to store config info
-const createConfig = obj => {
+const createConfig = (obj) => {
   try {
     console.log("\n* Creating /config folder");
     fs.mkdirSync("./config");
@@ -118,30 +132,14 @@ const createConfig = obj => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 // Parses `brixConfig` object into stylesheet header for WordPress
-const getStylesheetHeader = obj => {
-  return `/*
-  Theme Name: ${obj.themeName}
-  Theme URI: ${obj.themeUri}
-  Author: ${obj.themeAuthorName}
-  Author URI: ${obj.themeAuthorUri}
-  Description: ${obj.themeDescription}
-  Version: ${obj.themeVersion}
-  Requires at least: ${obj.themeRequiredWp}
-  Tested up to: ${obj.themeTestedWp}
-  Requires PHP: ${obj.themeRequiredPhp}
-  License: ${obj.themeLicenseName}
-  License URI: ${obj.themeLicenseUri}
-  Text Domain: ${obj.themeSlug}
-  This theme is powered by the Brix Theme Development Kit (TDK), based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc. Underscores is distributed under the terms of the GNU GPL v2 or later. Normalizing styles have been helped along thanks to the fine work of Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
-*/\n`;
-}
+const getStylesheetHeader = require(process.cwd() + "/templates/style-head.js")
 
-const getMainStyles = require(process.cwd() + '/templates/style.js');
+const getMainStyles = require(process.cwd() + "/templates/style.js");
 
-const getRtlStyles = require(process.cwd() + '/templates/style-rtl.js');
+const getRtlStyles = require(process.cwd() + "/templates/style-rtl.js");
 
 // Creates style.css
 const createFile = (name, format, content) => {
@@ -152,11 +150,12 @@ const createFile = (name, format, content) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
-const getFunctionsContent = require(process.cwd() + '/templates/functions-php.js');
+const getFunctionsContent = require(process.cwd() +
+  "/templates/functions-php.js");
 
-const getIndexContent = require(process.cwd() + '/templates/index-php.js');
+const getIndexContent = require(process.cwd() + "/templates/index-php.js");
 
 // Main function
 const main = () => {
@@ -175,8 +174,12 @@ const main = () => {
   brixConfig.themeLicenseUri = getThemeLicenseUri();
 
   brixConfig.initialContent = {};
-  brixConfig.initialContent.style = getStylesheetHeader(brixConfig).concat(getMainStyles());
-  brixConfig.initialContent.styleRtl = getStylesheetHeader(brixConfig).concat(getRtlStyles());
+  brixConfig.initialContent.style = getStylesheetHeader(brixConfig).concat(
+    getMainStyles()
+  );
+  brixConfig.initialContent.styleRtl = getStylesheetHeader(brixConfig).concat(
+    getRtlStyles()
+  );
   brixConfig.initialContent.functions = getFunctionsContent(brixConfig);
   brixConfig.initialContent.index = getIndexContent(brixConfig);
 
@@ -187,7 +190,7 @@ const main = () => {
   createFile("style-rtl", "css", brixConfig.initialContent.styleRtl);
 
   createFile("functions", "php", brixConfig.initialContent.functions);
-  
+
   createFile("index", "php", brixConfig.initialContent.index);
 
   delete brixConfig.initialContent;
@@ -201,6 +204,6 @@ const main = () => {
   }
 
   // console.log(themePath, brixConfig.themeAuthorName, brixConfig.themeUri);
-}
+};
 
 main();
