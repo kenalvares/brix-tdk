@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 
-const path = require("path");
-const fs = require("fs");
-const _ = require("lodash");
-const prompt = require("prompt-sync")({ sigint: true });
+import * as path from 'path';
+import * as fs from 'fs';
+import _ from 'lodash';
+import promptSync from 'prompt-sync';
+import { removeWhiteSpaces } from "./helpers/formatters.mjs";
+import { createFile } from "./helpers/file-managers.mjs";
+import getFunctionsContent from "./templates/functions-php.mjs";
+import getIndexContent from "./templates/index-php.mjs";
+import getStylesheetHeader from "./templates/style-head.mjs";
+import getRtlStyles from "./templates/style-rtl.mjs";
+import getMainStyles from "./templates/style.mjs";
 let brixConfig = {};
+const prompt = promptSync({ sigint: true });
 
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 const getThemeName = () => {
@@ -21,9 +29,6 @@ const getThemeName = () => {
   }
 };
 
-// Removes all whitespaces in a string
-const removeWhiteSpaces = (str) => str.replace(/\s+/g, "");
-
 // Returns the path to the newly generated theme
 const getThemePath = (str) => path.join(process.cwd(), str);
 
@@ -37,7 +42,13 @@ const getThemeUri = () => {
 };
 
 // Returns Author Name
-const getThemeAuthorName = () => prompt("\n* Enter Author Name: ");
+const getThemeAuthorName = () => {
+  const str = prompt("\n* Enter Author Name: ");
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "";
+  }
+  return str;
+}
 
 // Returns Author URI after basic formatting and validation
 const getThemeAuthorUri = () => {
@@ -49,7 +60,13 @@ const getThemeAuthorUri = () => {
 };
 
 // Returns Description
-const getThemeDescription = () => prompt("\nEnter Theme Description: ");
+const getThemeDescription = () => {
+  const str = prompt("\nEnter Theme Description: ");
+  if (str.length <= 0 || str == "" || str == undefined || str == null) {
+    return "";
+  }
+  return str;
+}
 
 // Returns minimum required version of WordPress
 const getThemeRequiredWp = () => {
@@ -99,9 +116,7 @@ const getThemeLicenseUri = () => {
 // Creates parent theme folder after basic formatting and validation
 const createThemeFolder = (name, dir) => {
   try {
-    console.log("\n* Creating theme folder");
     fs.mkdirSync(dir);
-    console.log("    - Successfully created /" + dir);
     process.chdir(dir);
   } catch (err) {
     if (err.code === "EEXIST") {
@@ -118,44 +133,12 @@ const createThemeFolder = (name, dir) => {
 // Creates config folder and brix-config.json to store config info
 const createConfig = (obj) => {
   try {
-    console.log("\n* Creating /config folder");
     fs.mkdirSync("./config");
-    console.log("    - Successfully created /config");
-  } catch (err) {
-    console.log(err);
-  }
-
-  try {
-    console.log("\n* Creating brix-config.json");
     fs.writeFileSync("./config/brix-config.json", JSON.stringify(obj));
-    console.log("    - Successfully created brix-config.json");
   } catch (err) {
     console.log(err);
   }
 };
-
-// Parses `brixConfig` object into stylesheet header for WordPress
-const getStylesheetHeader = require(process.cwd() + "/templates/style-head.js")
-
-const getMainStyles = require(process.cwd() + "/templates/style.js");
-
-const getRtlStyles = require(process.cwd() + "/templates/style-rtl.js");
-
-// Creates style.css
-const createFile = (name, format, content) => {
-  try {
-    console.log(`\n* Creating name.${format}`);
-    fs.writeFileSync(`./${name}.${format}`, content);
-    console.log(`\t- Successfully created ${name}.${format}`);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-const getFunctionsContent = require(process.cwd() +
-  "/templates/functions-php.js");
-
-const getIndexContent = require(process.cwd() + "/templates/index-php.js");
 
 // Main function
 const main = () => {
@@ -196,14 +179,6 @@ const main = () => {
   delete brixConfig.initialContent;
 
   createConfig(brixConfig);
-
-  try {
-    console.log(`\n* Your Brix Theme is ready for use!\nTry 'cd ${themePath}'`);
-  } catch (error) {
-    console.log(error);
-  }
-
-  // console.log(themePath, brixConfig.themeAuthorName, brixConfig.themeUri);
 };
 
 main();

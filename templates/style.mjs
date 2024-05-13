@@ -1,4 +1,4 @@
-module.exports = function (obj) {
+const getMainStyles = obj => {
   return `
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
@@ -947,3 +947,5 @@ textarea {
 }
 `;
 }
+
+export default getMainStyles;

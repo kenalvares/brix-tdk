@@ -1,4 +1,4 @@
-module.exports = function (obj) {
+const getIndexContent = obj => {
     return `<?php
     /**
      * The main template file
@@ -58,4 +58,5 @@ module.exports = function (obj) {
     get_footer();
     `;
   }
-  
+
+  export default getIndexContent;

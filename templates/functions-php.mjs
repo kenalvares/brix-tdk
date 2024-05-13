@@ -1,4 +1,4 @@
-module.exports = function (obj) {
+const getFunctionsContent = obj => {
     return `<?php
     /**
      * ${obj.themeName} functions and definitions
@@ -185,3 +185,5 @@ module.exports = function (obj) {
     }
   `;
   }
+
+  export default getFunctionsContent;
