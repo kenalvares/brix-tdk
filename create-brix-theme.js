@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 
-import * as path from 'path';
-import * as fs from 'fs';
-import _ from 'lodash';
-import promptSync from 'prompt-sync';
+import * as path from "path";
+import * as fs from "fs";
+import _ from "lodash";
+import promptSync from "prompt-sync";
 import { removeWhiteSpaces } from "./helpers/formatters.mjs";
 import { createFile } from "./helpers/file-managers.mjs";
+import getStylesheetHeader from "./templates/style-head.mjs";
+import getMainStyles from "./templates/style.mjs";
+import getRtlStyles from "./templates/style-rtl.mjs";
 import getFunctionsContent from "./templates/functions-php.mjs";
 import getIndexContent from "./templates/index-php.mjs";
-import getStylesheetHeader from "./templates/style-head.mjs";
-import getRtlStyles from "./templates/style-rtl.mjs";
-import getMainStyles from "./templates/style.mjs";
+import getSidebarContent from "./templates/sidebar-php.mjs";
+import getSearchContent from "./templates/search-php.mjs";
+import getArchiveContent from "./templates/archive-php.mjs";
+import getCommentsContent from "./templates/comments-php.mjs";
+import getFooterContent from "./templates/footer-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -48,7 +53,7 @@ const getThemeAuthorName = () => {
     return "";
   }
   return str;
-}
+};
 
 // Returns Author URI after basic formatting and validation
 const getThemeAuthorUri = () => {
@@ -66,7 +71,7 @@ const getThemeDescription = () => {
     return "";
   }
   return str;
-}
+};
 
 // Returns minimum required version of WordPress
 const getThemeRequiredWp = () => {
@@ -155,30 +160,26 @@ const main = () => {
   brixConfig.themeRequiredPhp = getThemeRequiredPhp();
   brixConfig.themeLicenseName = getThemeLicenseName();
   brixConfig.themeLicenseUri = getThemeLicenseUri();
-
-  brixConfig.initialContent = {};
-  brixConfig.initialContent.style = getStylesheetHeader(brixConfig).concat(
-    getMainStyles()
-  );
-  brixConfig.initialContent.styleRtl = getStylesheetHeader(brixConfig).concat(
-    getRtlStyles()
-  );
-  brixConfig.initialContent.functions = getFunctionsContent(brixConfig);
-  brixConfig.initialContent.index = getIndexContent(brixConfig);
-
   createThemeFolder(brixConfig.themeName, themePath);
-
-  createFile("style", "css", brixConfig.initialContent.style);
-
-  createFile("style-rtl", "css", brixConfig.initialContent.styleRtl);
-
-  createFile("functions", "php", brixConfig.initialContent.functions);
-
-  createFile("index", "php", brixConfig.initialContent.index);
-
-  delete brixConfig.initialContent;
-
   createConfig(brixConfig);
+
+  createFile(
+    "style",
+    "css",
+    getStylesheetHeader(brixConfig).concat(getMainStyles())
+  );
+  createFile(
+    "style-rtl",
+    "css",
+    getStylesheetHeader(brixConfig).concat(getRtlStyles())
+  );
+  createFile("functions", "php", getFunctionsContent(brixConfig));
+  createFile("index", "php", getIndexContent(brixConfig));
+  createFile("sidebar", "php", getSidebarContent(brixConfig));
+  createFile("search", "php", getSearchContent(brixConfig));
+  createFile("archive", "php", getArchiveContent(brixConfig));
+  createFile("comments", "php", getCommentsContent(brixConfig));
+  createFile("footer", "php", getFooterContent(brixConfig));
 };
 
 main();
