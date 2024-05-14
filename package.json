@@ -10,7 +10,10 @@
   "author": "Kenneth Alvares",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.77.1"
   },
   "bin": {
     "create-brix-theme": "./create-brix-theme.js"

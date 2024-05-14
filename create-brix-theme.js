@@ -31,6 +31,7 @@ import getTemplatePartsContentContent from "./templates/template-parts/content-p
 import getTemplatePartsContentNoneContent from "./templates/template-parts/content-none-php.mjs";
 import getTemplatePartsContentPageContent from "./templates/template-parts/content-page-php.mjs";
 import getTemplatePartsContentSearchContent from "./templates/template-parts/content-search-php.mjs";
+import npm from "npm-programmatic";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -134,9 +135,10 @@ const getThemeLicenseUri = () => {
 };
 
 // Creates parent theme folder after basic formatting and validation
-const createThemeFolder = (name, dir) => {
+const createThemeFolders = (name, dir) => {
   try {
     fs.mkdirSync(dir);
+    fs.mkdirSync(dir + " dev");
     process.chdir(dir);
   } catch (err) {
     if (err.code === "EEXIST") {
@@ -175,7 +177,7 @@ const main = () => {
   brixConfig.themeRequiredPhp = getThemeRequiredPhp();
   brixConfig.themeLicenseName = getThemeLicenseName();
   brixConfig.themeLicenseUri = getThemeLicenseUri();
-  createThemeFolder(brixConfig.themeName, themePath);
+  createThemeFolders(brixConfig.themeName, themePath);
   createConfig(brixConfig);
 
   createFile(
@@ -222,6 +224,10 @@ const main = () => {
   createFile("content-none", "php", getTemplatePartsContentNoneContent(brixConfig));
   createFile("content-page", "php", getTemplatePartsContentPageContent(brixConfig));
   createFile("content-search", "php", getTemplatePartsContentSearchContent(brixConfig));
+
+  process.chdir("..");
+  process.chdir("..");
+  process.chdir(process.cwd()+"/"+brixConfig.themeName+" dev");
 };
 
 main();
