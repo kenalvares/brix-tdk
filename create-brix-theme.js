@@ -20,6 +20,7 @@ import getHeaderContent from "./templates/header-php.mjs";
 import getPageContent from "./templates/page-php.mjs";
 import getSingleContent from "./templates/single-php.mjs";
 import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
+import getCustomizerContent from "./templates/inc/customizer-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -192,6 +193,7 @@ const main = () => {
   process.chdir(process.cwd() + "/inc")
 
   createFile("custom-header", "php", getCustomHeaderContent(brixConfig));
+  createFile("customizer", "php", getCustomizerContent(brixConfig));
 };
 
 main();
