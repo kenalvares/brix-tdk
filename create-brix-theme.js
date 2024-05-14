@@ -16,6 +16,7 @@ import getSearchContent from "./templates/search-php.mjs";
 import getArchiveContent from "./templates/archive-php.mjs";
 import getCommentsContent from "./templates/comments-php.mjs";
 import getFooterContent from "./templates/footer-php.mjs";
+import getHeaderContent from "./templates/header-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -173,13 +174,14 @@ const main = () => {
     "css",
     getStylesheetHeader(brixConfig).concat(getRtlStyles())
   );
-  createFile("functions", "php", getFunctionsContent(brixConfig));
-  createFile("index", "php", getIndexContent(brixConfig));
-  createFile("sidebar", "php", getSidebarContent(brixConfig));
-  createFile("search", "php", getSearchContent(brixConfig));
   createFile("archive", "php", getArchiveContent(brixConfig));
   createFile("comments", "php", getCommentsContent(brixConfig));
   createFile("footer", "php", getFooterContent(brixConfig));
+  createFile("functions", "php", getFunctionsContent(brixConfig));
+  createFile("header", "php", getHeaderContent(brixConfig));
+  createFile("index", "php", getIndexContent(brixConfig));
+  createFile("search", "php", getSearchContent(brixConfig));
+  createFile("sidebar", "php", getSidebarContent(brixConfig));
 };
 
 main();
