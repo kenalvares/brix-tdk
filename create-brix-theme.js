@@ -23,6 +23,8 @@ import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
 import getCustomizerContent from "./templates/inc/customizer-php.mjs";
 import getJetpackContent from "./templates/inc/jetpack-php.mjs";
 import getTemplateFunctionsContent from "./templates/inc/template-functions-php.mjs";
+import getTemplateTagsContent from "./templates/inc/template-tags-php.mjs";
+import getCustomizerJsContent from "./templates/js/customizer-js.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -198,6 +200,12 @@ const main = () => {
   createFile("customizer", "php", getCustomizerContent(brixConfig));
   createFile("jetpack", "php", getJetpackContent(brixConfig));
   createFile("template-functions", "php", getTemplateFunctionsContent(brixConfig));
+  createFile("template-tags", "php", getTemplateTagsContent(brixConfig));
+
+  process.chdir("..");
+  fs.mkdirSync(process.cwd() + "/js");
+  process.chdir(process.cwd() + "/js")
+  createFile("customizer", "js", getCustomizerJsContent(brixConfig));
 };
 
 main();

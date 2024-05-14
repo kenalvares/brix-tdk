@@ -6,7 +6,7 @@ const getSingleContent = obj => {
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @package sample
+ * @package ${obj.themeSlug}
  */
 
 get_header();
