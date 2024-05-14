@@ -228,6 +228,36 @@ const main = () => {
   process.chdir("..");
   process.chdir("..");
   process.chdir(process.cwd()+"/"+brixConfig.themeName+" dev");
+
+  fs.mkdirSync(process.cwd()+"/scss");
+  process.chdir(process.cwd()+"/scss");
+
+  fs.mkdirSync(process.cwd()+"/abstracts");
+  process.chdir(process.cwd()+"/abstracts");
+  createFile("");
+
+  process.chdir("..");
+  fs.mkdirSync(process.cwd()+"/base");
+  process.chdir(process.cwd()+"/base");
+  // createFile("");
+
+  process.chdir("..");
+  fs.mkdirSync(process.cwd()+"/components");
+  process.chdir(process.cwd()+"/components");
+  // createFile("");
+  
+  process.chdir("..");
+  fs.mkdirSync(process.cwd()+"/layouts");
+  process.chdir(process.cwd()+"/layouts");
+  // createFile("");
+  
+  process.chdir("..");
+  fs.mkdirSync(process.cwd()+"/vendor");
+  process.chdir(process.cwd()+"/vendor");
+  // createFile("");
+
+  process.chdir("..");
+  createFile("styles", "scss", )
 };
 
 main();
