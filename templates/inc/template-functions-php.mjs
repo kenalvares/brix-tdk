@@ -4,7 +4,7 @@ const getTemplateFunctionsContent = obj => {
 /**
  * Functions which enhance the theme by hooking into WordPress
  *
- * @package sample
+ * @package ${obj.themeSlug}
  */
 
 /**
