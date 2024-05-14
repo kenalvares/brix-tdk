@@ -8,7 +8,7 @@ const getHeaderContent = obj => {
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package sample
+ * @package ${obj.themeSlug}
  */
 
 ?>
