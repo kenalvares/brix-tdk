@@ -14,6 +14,7 @@ import getIndexContent from "./templates/index-php.mjs";
 import getSidebarContent from "./templates/sidebar-php.mjs";
 import getSearchContent from "./templates/search-php.mjs";
 import getArchiveContent from "./templates/archive-php.mjs";
+import get404Content from "./templates/404-php.mjs";
 import getCommentsContent from "./templates/comments-php.mjs";
 import getFooterContent from "./templates/footer-php.mjs";
 import getHeaderContent from "./templates/header-php.mjs";
@@ -25,6 +26,11 @@ import getJetpackContent from "./templates/inc/jetpack-php.mjs";
 import getTemplateFunctionsContent from "./templates/inc/template-functions-php.mjs";
 import getTemplateTagsContent from "./templates/inc/template-tags-php.mjs";
 import getCustomizerJsContent from "./templates/js/customizer-js.mjs";
+import getNavigationJsContent from "./templates/js/navigation-js.mjs";
+import getTemplatePartsContentContent from "./templates/template-parts/content-php.mjs";
+import getTemplatePartsContentNoneContent from "./templates/template-parts/content-none-php.mjs";
+import getTemplatePartsContentPageContent from "./templates/template-parts/content-page-php.mjs";
+import getTemplatePartsContentSearchContent from "./templates/template-parts/content-search-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -182,6 +188,7 @@ const main = () => {
     "css",
     getStylesheetHeader(brixConfig).concat(getRtlStyles())
   );
+  createFile("404", "php", get404Content(brixConfig));
   createFile("archive", "php", getArchiveContent(brixConfig));
   createFile("comments", "php", getCommentsContent(brixConfig));
   createFile("footer", "php", getFooterContent(brixConfig));
@@ -206,6 +213,15 @@ const main = () => {
   fs.mkdirSync(process.cwd() + "/js");
   process.chdir(process.cwd() + "/js")
   createFile("customizer", "js", getCustomizerJsContent(brixConfig));
+  createFile("navigation", "js", getNavigationJsContent(brixConfig));
+  
+  process.chdir("..");
+  fs.mkdirSync(process.cwd() + "/template-parts");
+  process.chdir(process.cwd() + "/template-parts");
+  createFile("content", "php", getTemplatePartsContentContent(brixConfig));
+  createFile("content-none", "php", getTemplatePartsContentNoneContent(brixConfig));
+  createFile("content-page", "php", getTemplatePartsContentPageContent(brixConfig));
+  createFile("content-search", "php", getTemplatePartsContentSearchContent(brixConfig));
 };
 
 main();
