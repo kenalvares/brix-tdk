@@ -1,15 +1,17 @@
 import gulp from 'gulp';
 const { series, parallel, src, dest, task } = gulp;
-import dartSass from 'sass';
+import * as dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 import concat from 'gulp-concat';
+import process from 'process';
 const sass = gulpSass(dartSass);
 
 function compileSass() {
-    return gulp.src('../test/sass/**/*.scss') // Path to your SCSS files
+  process.chdir("..");
+    return gulp.src(process.cwd()+"/myTheme dev/scss/styles.scss") // Path to your SCSS files
       .pipe(sass().on('error', sass.logError))
       .pipe(concat("style.css"))
-      .pipe(gulp.dest('../test')); // Output directory for CSS files
+      .pipe(gulp.dest(process.cwd()+"/myTheme")); // Output directory for CSS files
   }
   gulp.task('sass', compileSass);
 

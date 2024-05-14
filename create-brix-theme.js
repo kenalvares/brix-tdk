@@ -31,7 +31,17 @@ import getTemplatePartsContentContent from "./templates/template-parts/content-p
 import getTemplatePartsContentNoneContent from "./templates/template-parts/content-none-php.mjs";
 import getTemplatePartsContentPageContent from "./templates/template-parts/content-page-php.mjs";
 import getTemplatePartsContentSearchContent from "./templates/template-parts/content-search-php.mjs";
-import npm from "npm-programmatic";
+import getStylesScssContent from "./scss/styles-scss.mjs";
+import getVendorDirScssContent from "./scss/vendors/vendor-dir-scss.mjs";
+import getAbstractsDirScssContent from "./scss/abstracts/abstracts-dir-scss.mjs";
+import getFontsScssContent from "./scss/abstracts/fonts-scss.mjs";
+import getVariablesScssContent from "./scss/abstracts/variables-scss.mjs";
+import getMixinsScssContent from "./scss/abstracts/mixins-scss.mjs";
+import getBaseDirScssContent from "./scss/base/base-dir-scss.mjs";
+import getResetScssContent from "./scss/base/reset-scss.mjs";
+import getTypographyScssContent from "./scss/base/typography-scss.mjs";
+import getComponentsDirScssContent from "./scss/components/components-dir-scss.mjs";
+import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -234,30 +244,35 @@ const main = () => {
 
   fs.mkdirSync(process.cwd()+"/abstracts");
   process.chdir(process.cwd()+"/abstracts");
-  createFile("");
+  createFile("__abstracts-dir", "scss", getAbstractsDirScssContent(brixConfig));
+  createFile("_fonts", "scss", getFontsScssContent(brixConfig));
+  createFile("_variables", "scss", getVariablesScssContent(brixConfig));
+  createFile("_mixins", "scss", getMixinsScssContent(brixConfig));
 
   process.chdir("..");
   fs.mkdirSync(process.cwd()+"/base");
   process.chdir(process.cwd()+"/base");
-  // createFile("");
+  createFile("__base-dir", "scss", getBaseDirScssContent(brixConfig));
+  createFile("_reset", "scss", getResetScssContent(brixConfig));
+  createFile("_typography", "scss", getTypographyScssContent(brixConfig));
 
   process.chdir("..");
   fs.mkdirSync(process.cwd()+"/components");
   process.chdir(process.cwd()+"/components");
-  // createFile("");
-  
+  createFile("__components-dir", "scss", getComponentsDirScssContent(brixConfig));
+
   process.chdir("..");
   fs.mkdirSync(process.cwd()+"/layouts");
   process.chdir(process.cwd()+"/layouts");
-  // createFile("");
+  createFile("__layouts-dir", "scss", getLayoutsDirScssContent(brixConfig));
   
   process.chdir("..");
   fs.mkdirSync(process.cwd()+"/vendor");
   process.chdir(process.cwd()+"/vendor");
-  // createFile("");
+  createFile("__vendor-dir", "scss", getVendorDirScssContent(brixConfig));
 
   process.chdir("..");
-  createFile("styles", "scss", )
+  createFile("styles", "scss", getStylesScssContent(brixConfig));
 };
 
 main();
