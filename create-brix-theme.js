@@ -19,6 +19,7 @@ import getFooterContent from "./templates/footer-php.mjs";
 import getHeaderContent from "./templates/header-php.mjs";
 import getPageContent from "./templates/page-php.mjs";
 import getSingleContent from "./templates/single-php.mjs";
+import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -187,7 +188,10 @@ const main = () => {
   createFile("sidebar", "php", getSidebarContent(brixConfig));
   createFile("single", "php", getSingleContent(brixConfig));
 
-  console.log(process.cwd());
+  fs.mkdirSync(process.cwd() + "/inc")
+  process.chdir(process.cwd() + "/inc")
+
+  createFile("custom-header", "php", getCustomHeaderContent(brixConfig));
 };
 
 main();
