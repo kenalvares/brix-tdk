@@ -21,6 +21,7 @@ import getPageContent from "./templates/page-php.mjs";
 import getSingleContent from "./templates/single-php.mjs";
 import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
 import getCustomizerContent from "./templates/inc/customizer-php.mjs";
+import getJetpackContent from "./templates/inc/jetpack-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -194,6 +195,7 @@ const main = () => {
 
   createFile("custom-header", "php", getCustomHeaderContent(brixConfig));
   createFile("customizer", "php", getCustomizerContent(brixConfig));
+  createFile("jetpack", "php", getJetpackContent(brixConfig));
 };
 
 main();

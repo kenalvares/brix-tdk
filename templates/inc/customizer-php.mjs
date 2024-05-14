@@ -4,7 +4,7 @@ const getCustomizerContent = obj => {
 /**
  * sample Theme Customizer
  *
- * @package sample
+ * @package ${obj.themeSlug}
  */
 
 /**
