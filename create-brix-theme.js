@@ -18,6 +18,7 @@ import getCommentsContent from "./templates/comments-php.mjs";
 import getFooterContent from "./templates/footer-php.mjs";
 import getHeaderContent from "./templates/header-php.mjs";
 import getPageContent from "./templates/page-php.mjs";
+import getSingleContent from "./templates/single-php.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -184,6 +185,9 @@ const main = () => {
   createFile("page", "php", getPageContent(brixConfig));
   createFile("search", "php", getSearchContent(brixConfig));
   createFile("sidebar", "php", getSidebarContent(brixConfig));
+  createFile("single", "php", getSingleContent(brixConfig));
+
+  console.log(process.cwd());
 };
 
 main();
