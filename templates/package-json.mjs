@@ -1,8 +1,8 @@
 const getPackageJsonContent = obj => {
 return `
 {
-    "name": "${obj.themeName}",
-    "version": "1.0.0",
+    "name": "${obj.themeSlug}",
+    "version": "${obj.themeVersion}",
     "devDependencies": {
       "gulp": "^4.0.2",
       "gulp-concat": "^2.6.1",
