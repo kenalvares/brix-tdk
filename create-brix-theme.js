@@ -42,6 +42,7 @@ import getResetScssContent from "./scss/base/reset-scss.mjs";
 import getTypographyScssContent from "./scss/base/typography-scss.mjs";
 import getComponentsDirScssContent from "./scss/components/components-dir-scss.mjs";
 import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs";
+import getPackageJsonContent from "./templates/package-json.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -238,6 +239,31 @@ const main = () => {
   process.chdir("..");
   process.chdir("..");
   process.chdir(process.cwd()+"/"+brixConfig.themeName+" dev");
+  createFile("package", "json", getPackageJsonContent(brixConfig));
+  createFile("gulpfile", "js", `import gulp from 'gulp';
+  const { series, parallel, src, dest, task } = gulp;
+  import * as dartSass from 'sass';
+  import gulpSass from 'gulp-sass';
+  import concat from 'gulp-concat';
+  import process from 'process';
+  const sass = gulpSass(dartSass);
+  
+  function compileSass() {
+    process.chdir("..");
+      return gulp.src(process.cwd()+"/${brixConfig.themeName} dev/scss/styles.scss") // Path to your SCSS files
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat("style.css"))
+        .pipe(gulp.dest(process.cwd()+"/${brixConfig.themeName}")); // Output directory for CSS files
+    }
+    gulp.task('sass', compileSass);
+  
+  function defaultTask(cb) {
+      // place code for your default task here
+      compileSass();
+      cb();
+    }
+  export default defaultTask;
+  `);
 
   fs.mkdirSync(process.cwd()+"/scss");
   process.chdir(process.cwd()+"/scss");
