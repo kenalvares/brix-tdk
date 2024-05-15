@@ -1,16 +1,10 @@
 const getAbstractsDirScssContent = obj => {
 return `
-/*
-This file is used to contain all abstracts imports.
-Files inside this folder can contain abstract settings, helpers or functions. They have no direct output.
-*/
-
-/*
-Import Abstracts files
-*/
 @import "fonts";
 @import "mixins";
-@import "variables";`;
+@import "variables";
+
+`;
 }
 
 export default getAbstractsDirScssContent;

@@ -4,6 +4,7 @@ import * as path from "path";
 import * as fs from "fs";
 import _ from "lodash";
 import promptSync from "prompt-sync";
+import child_process from "child_process";
 import { removeWhiteSpaces } from "./helpers/formatters.mjs";
 import { createFile } from "./helpers/file-managers.mjs";
 import getStylesheetHeader from "./templates/style-head.mjs";
@@ -43,6 +44,7 @@ import getTypographyScssContent from "./scss/base/typography-scss.mjs";
 import getComponentsDirScssContent from "./scss/components/components-dir-scss.mjs";
 import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs";
 import getPackageJsonContent from "./templates/package-json.mjs";
+import getGulpfileJsContent from "./templates/gulpfile-js.mjs";
 let brixConfig = {};
 const prompt = promptSync({ sigint: true });
 
@@ -149,7 +151,7 @@ const getThemeLicenseUri = () => {
 const createThemeFolders = (name, dir) => {
   try {
     fs.mkdirSync(dir);
-    fs.mkdirSync(dir + " dev");
+    fs.mkdirSync(dir + "-dev");
     process.chdir(dir);
   } catch (err) {
     if (err.code === "EEXIST") {
@@ -238,32 +240,10 @@ const main = () => {
 
   process.chdir("..");
   process.chdir("..");
-  process.chdir(process.cwd()+"/"+brixConfig.themeName+" dev");
+  process.chdir(process.cwd()+"/"+brixConfig.themeName+"-dev");
   createFile("package", "json", getPackageJsonContent(brixConfig));
-  createFile("gulpfile", "js", `import gulp from 'gulp';
-  const { series, parallel, src, dest, task } = gulp;
-  import * as dartSass from 'sass';
-  import gulpSass from 'gulp-sass';
-  import concat from 'gulp-concat';
-  import process from 'process';
-  const sass = gulpSass(dartSass);
-  
-  function compileSass() {
-    process.chdir("..");
-      return gulp.src(process.cwd()+"/${brixConfig.themeName} dev/scss/styles.scss") // Path to your SCSS files
-        .pipe(sass().on('error', sass.logError))
-        .pipe(concat("style.css"))
-        .pipe(gulp.dest(process.cwd()+"/${brixConfig.themeName}")); // Output directory for CSS files
-    }
-    gulp.task('sass', compileSass);
-  
-  function defaultTask(cb) {
-      // place code for your default task here
-      compileSass();
-      cb();
-    }
-  export default defaultTask;
-  `);
+  child_process.execSync('npm install --save-dev gulp sass gulp-sass gulp-concat process',{stdio:[0,1,2]});
+  createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));
 
   fs.mkdirSync(process.cwd()+"/scss");
   process.chdir(process.cwd()+"/scss");
@@ -299,6 +279,8 @@ const main = () => {
 
   process.chdir("..");
   createFile("styles", "scss", getStylesScssContent(brixConfig));
+
+  console.log(`\n\n'${brixConfig.themeName}' is ready.\nTry cd "../${brixConfig.themeName}-dev"`);
 };
 
 main();

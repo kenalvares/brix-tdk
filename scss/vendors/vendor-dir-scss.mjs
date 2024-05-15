@@ -1,12 +1,5 @@
 const getVendorDirScssContent = obj => {
 return `
-/*
-This file is used to contain all vendor imports.
-*/
-
-/*
-Import Vendor files
-*/
 // @import "bourbon/bourbon";
 // @import "neat/neat";
 // @import "fontawesome/font-awesome";
@@ -14,6 +7,7 @@ Import Vendor files
 /*
 Additonal Vendor Tools
 */
+
 `;
 }
 
