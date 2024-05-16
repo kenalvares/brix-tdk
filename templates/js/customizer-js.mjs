@@ -1,4 +1,7 @@
-const getCustomizerJsContent = obj => {
+/*
+    customizer.js
+*/
+const getCustomizerJsCode = obj => {
 return `
 /* global wp, jQuery */
 /**
@@ -45,4 +48,4 @@ return `
 `;
 }
 
-export default getCustomizerJsContent;
+export default getCustomizerJsCode;

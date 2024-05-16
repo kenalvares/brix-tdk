@@ -32,10 +32,10 @@ import getSinglePhpCode from "./templates/single-php.mjs"; // single.php
 import getCustomHeaderPhpCode from "./templates/inc/custom-header-php.mjs"; // custom-header.php
 import getCustomizerPhpCode from "./templates/inc/customizer-php.mjs"; // customizer.php
 import getJetpackPhpCode from "./templates/inc/jetpack-php.mjs"; // jetpack.php
-import getTemplateFunctionsPhpCode from "./templates/inc/template-functions-php.mjs";
-import getTemplateTagsPhpCode from "./templates/inc/template-tags-php.mjs";
+import getTemplateFunctionsPhpCode from "./templates/inc/template-functions-php.mjs"; // template-functions.php
+import getTemplateTagsPhpCode from "./templates/inc/template-tags-php.mjs"; // template-tags.php
 
-import getCustomizerJsContent from "./templates/js/customizer-js.mjs";
+import getCustomizerJsCode from "./templates/js/customizer-js.mjs"; // customizer.js
 import getNavigationJsContent from "./templates/js/navigation-js.mjs";
 
 import getTemplatePartsContentContent from "./templates/template-parts/content-php.mjs";
@@ -238,7 +238,7 @@ const main = () => {
   process.chdir("..");
   fs.mkdirSync(process.cwd() + "/js");
   process.chdir(process.cwd() + "/js");
-  createFile("customizer", "js", getCustomizerJsContent(brixConfig));
+  createFile("customizer", "js", getCustomizerJsCode(brixConfig));
   createFile("navigation", "js", getNavigationJsContent(brixConfig));
 
   process.chdir("..");
