@@ -1,5 +1,8 @@
-const getFooterContent = obj => {
-    return `
+/*
+    footer.php
+*/
+const getFooterPhpCode = obj => {
+return `
 <?php
 /**
  * The template for displaying the footer
@@ -37,4 +40,4 @@ const getFooterContent = obj => {
 `;
 }
 
-export default getFooterContent;
+export default getFooterPhpCode;

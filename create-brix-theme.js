@@ -24,7 +24,7 @@ import getSearchPhpCode from "./templates/search-php.mjs"; // search.php
 import getArchivePhpCode from "./templates/archive-php.mjs"; // archive.php
 import get404PhpCode from "./templates/404-php.mjs"; // 404.php
 import getCommentsPhpCode from "./templates/comments-php.mjs"; // comments.php
-import getFooterContent from "./templates/footer-php.mjs";
+import getFooterPhpCode from "./templates/footer-php.mjs";
 import getHeaderContent from "./templates/header-php.mjs";
 import getPageContent from "./templates/page-php.mjs";
 import getSingleContent from "./templates/single-php.mjs";
@@ -213,7 +213,7 @@ const main = () => {
   createFile("404", "php", get404PhpCode(brixConfig));
   createFile("archive", "php", getArchivePhpCode(brixConfig));
   createFile("comments", "php", getCommentsPhpCode(brixConfig));
-  createFile("footer", "php", getFooterContent(brixConfig));
+  createFile("footer", "php", getFooterPhpCode(brixConfig));
   createFile("functions", "php", getFunctionsPhpCode(brixConfig));
   createFile("header", "php", getHeaderContent(brixConfig));
   createFile("index", "php", getIndexPhpCode(brixConfig));
