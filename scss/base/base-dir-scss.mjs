@@ -1,7 +1,6 @@
 const getBaseDirScssContent = obj => {
 return `
-@import "reset";
-@import "typography";
+@use "typography";
 
 `;
 }

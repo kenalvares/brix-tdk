@@ -1,8 +1,8 @@
 const getAbstractsDirScssContent = obj => {
 return `
-@import "fonts";
-@import "mixins";
-@import "variables";
+@use "fonts";
+@use "variables";
+@use "mixins";
 
 `;
 }

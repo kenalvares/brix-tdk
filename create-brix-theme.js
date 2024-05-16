@@ -13,8 +13,6 @@ const prompt = promptSync({ sigint: true });
 import { removeWhiteSpaces, removeLastFolder } from "./helpers/formatters.mjs"; // Formatting related functions
 import { createFile } from "./helpers/file-managers.mjs"; // File management functions
 
-import getStylesheetHeader from "./templates/style-head.mjs"; // Header for stylesheets
-import getStyleCssCode from "./templates/style-css.mjs"; // style.css
 import getStyleRtlCssCode from "./templates/style-rtl-css.mjs"; //style-rtl.css
 
 import getFunctionsPhpCode from "./templates/functions-php.mjs"; // functions.php
@@ -50,7 +48,7 @@ import getFontsScssContent from "./scss/abstracts/fonts-scss.mjs";
 import getVariablesScssContent from "./scss/abstracts/variables-scss.mjs";
 import getMixinsScssContent from "./scss/abstracts/mixins-scss.mjs";
 import getBaseDirScssContent from "./scss/base/base-dir-scss.mjs";
-import getResetScssContent from "./scss/base/reset-scss.mjs";
+import getResetScssContent from "./scss/reset-scss.mjs";
 import getTypographyScssContent from "./scss/base/typography-scss.mjs";
 import getComponentsDirScssContent from "./scss/components/components-dir-scss.mjs";
 import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs";
@@ -156,6 +154,7 @@ const getThemeLicenseUri = () => {
 // Creates parent theme folder after basic formatting and validation
 const createThemeFolders = (name, dir) => {
   try {
+    console.log(dir);
     fs.mkdirSync(dir);
     fs.mkdirSync(dir + "-dev");
     process.chdir(dir);
@@ -186,6 +185,7 @@ const main = () => {
   source = process.cwd();
   brixConfig.themeName = getThemeName();
   const themePath = getThemePath(brixConfig.themeName);
+  console.log(themePath);
   brixConfig.themeSlug = _.snakeCase(brixConfig.themeName);
   brixConfig.themeUri = getThemeUri();
   brixConfig.themeAuthorName = getThemeAuthorName();
@@ -197,19 +197,15 @@ const main = () => {
   brixConfig.themeRequiredPhp = getThemeRequiredPhp();
   brixConfig.themeLicenseName = getThemeLicenseName();
   brixConfig.themeLicenseUri = getThemeLicenseUri();
+
   createThemeFolders(brixConfig.themeName, themePath);
+
   createConfig(brixConfig);
 
   createFile(
-    "style",
-    "css",
-    getStylesheetHeader(brixConfig).concat(getStyleCssCode())
-  );
-  createFile(
     "style-rtl",
     "css",
-    getStylesheetHeader(brixConfig).concat(getStyleRtlCssCode())
-  );
+    getStyleRtlCssCode(brixConfig));
   createFile("404", "php", get404PhpCode(brixConfig));
   createFile("archive", "php", getArchivePhpCode(brixConfig));
   createFile("comments", "php", getCommentsPhpCode(brixConfig));
@@ -285,7 +281,6 @@ const main = () => {
   fs.mkdirSync(process.cwd() + "/base");
   process.chdir(process.cwd() + "/base");
   createFile("__base-dir", "scss", getBaseDirScssContent(brixConfig));
-  createFile("_reset", "scss", getResetScssContent(brixConfig));
   createFile("_typography", "scss", getTypographyScssContent(brixConfig));
 
   process.chdir("..");
@@ -308,10 +303,11 @@ const main = () => {
   createFile("__vendor-dir", "scss", getVendorDirScssContent(brixConfig));
 
   process.chdir("..");
+  createFile("_reset", "scss", getResetScssContent(brixConfig));
   createFile("styles", "scss", getStylesScssContent(brixConfig));
 
   console.log(
-    `\n\n'${brixConfig.themeName}' is ready.\nTry cd "../${brixConfig.themeName}-dev"`
+    `\n\n'${brixConfig.themeName}' is ready. Try:\ncd "../${brixConfig.themeName}-dev" && gulp`
   );
 };
 

@@ -1,9 +1,9 @@
 const getVendorDirScssContent = obj => {
 return `
-// @import "bourbon/bourbon";
-// @import "neat/neat";
-// @import "fontawesome/font-awesome";
-// @import "normalize/normalize";
+// @use "bourbon/bourbon";
+// @use "neat/neat";
+// @use "fontawesome/font-awesome";
+// @use "normalize/normalize";
 /*
 Additonal Vendor Tools
 */
