@@ -1,5 +1,8 @@
-const getHeaderContent = obj => {
-    return `
+/*
+    header.php
+*/
+const getHeaderPhpCode = obj => {
+return `
 <?php
 /**
  * The header for our theme
@@ -62,4 +65,4 @@ const getHeaderContent = obj => {
 `;
 }
 
-export default getHeaderContent;
+export default getHeaderPhpCode;
