@@ -36,7 +36,7 @@ import getTemplateFunctionsPhpCode from "./templates/inc/template-functions-php.
 import getTemplateTagsPhpCode from "./templates/inc/template-tags-php.mjs"; // template-tags.php
 
 import getCustomizerJsCode from "./templates/js/customizer-js.mjs"; // customizer.js
-import getNavigationJsContent from "./templates/js/navigation-js.mjs";
+import getNavigationJsCode from "./templates/js/navigation-js.mjs"; // navigation.js
 
 import getTemplatePartsContentContent from "./templates/template-parts/content-php.mjs";
 import getTemplatePartsContentNoneContent from "./templates/template-parts/content-none-php.mjs";
@@ -239,7 +239,7 @@ const main = () => {
   fs.mkdirSync(process.cwd() + "/js");
   process.chdir(process.cwd() + "/js");
   createFile("customizer", "js", getCustomizerJsCode(brixConfig));
-  createFile("navigation", "js", getNavigationJsContent(brixConfig));
+  createFile("navigation", "js", getNavigationJsCode(brixConfig));
 
   process.chdir("..");
   fs.mkdirSync(process.cwd() + "/template-parts");
