@@ -11,11 +11,11 @@ let source = "";
 const prompt = promptSync({ sigint: true });
 
 import { removeWhiteSpaces, removeLastFolder } from "./helpers/formatters.mjs"; // Formatting related functions
-import { createFile } from "./helpers/file-managers.mjs";
+import { createFile } from "./helpers/file-managers.mjs"; // File management functions
 
-import getStylesheetHeader from "./templates/style-head.mjs"; 
-import getStyleCssCode from "./templates/style-css.mjs";
-import getRtlStyles from "./templates/style-rtl.mjs";
+import getStylesheetHeader from "./templates/style-head.mjs"; // Header for stylesheets
+import getStyleCssCode from "./templates/style-css.mjs"; // style.css
+import getStyleRtlCssCode from "./templates/style-rtl-css.mjs"; //style-rtl.css
 
 import getFunctionsContent from "./templates/functions-php.mjs";
 import getIndexContent from "./templates/index-php.mjs";
@@ -204,7 +204,7 @@ const main = () => {
   createFile(
     "style-rtl",
     "css",
-    getStylesheetHeader(brixConfig).concat(getRtlStyles())
+    getStylesheetHeader(brixConfig).concat(getStyleRtlCssCode())
   );
   createFile("404", "php", get404Content(brixConfig));
   createFile("archive", "php", getArchiveContent(brixConfig));

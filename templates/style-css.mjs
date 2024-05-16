@@ -1,4 +1,6 @@
-// style.css
+/*
+    style.css
+*/
 const getStyleCssCode = obj => {
   return `
 /*--------------------------------------------------------------

@@ -1,6 +1,8 @@
-// Header of style.css
+/*
+    Header for stylesheets
+*/
 const getStylesheetHeader = obj => {
-    return `
+return `
 /*
   Theme Name: ${obj.themeName}
   Theme URI: ${obj.themeUri}
@@ -16,6 +18,6 @@ const getStylesheetHeader = obj => {
   Text Domain: ${obj.themeSlug}
   This theme is powered by the Brix Theme Development Kit (TDK), based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc. Underscores is distributed under the terms of the GNU GPL v2 or later. Normalizing styles have been helped along thanks to the fine work of Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 */\n`;
-  };
+};
 
 export default getStylesheetHeader;

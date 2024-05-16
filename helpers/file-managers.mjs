@@ -1,3 +1,6 @@
+/* 
+    File management functions    
+*/
 import * as fs from 'fs';
 
 // Creates files using ( 'file name', '.fileFormat', 'content' )

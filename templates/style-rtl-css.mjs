@@ -1,5 +1,7 @@
-// style-rtl.css
-const getRtlStyles = obj => {
+/*
+    style-rtl.css
+*/
+const getStyleRtlCssCode = obj => {
   return `
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
@@ -941,4 +943,4 @@ textarea {
 `;
 }
 
-export default getRtlStyles;
+export default getStyleRtlCssCode;
