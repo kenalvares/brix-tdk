@@ -1,5 +1,8 @@
-const getSearchContent = obj => {
-    return `
+/*
+    search.php
+*/
+const getSearchPhpCode = obj => {
+return `
 <?php
 /**
  * The template for displaying search results pages
@@ -56,4 +59,4 @@ get_footer();
 `;
 }
 
-export default getSearchContent;
+export default getSearchPhpCode;

@@ -18,10 +18,10 @@ import getStyleCssCode from "./templates/style-css.mjs"; // style.css
 import getStyleRtlCssCode from "./templates/style-rtl-css.mjs"; //style-rtl.css
 
 import getFunctionsPhpCode from "./templates/functions-php.mjs"; // functions.php
-import getIndexPhpCode from "./templates/index-php.mjs"; //index.php
-import getSidebarContent from "./templates/sidebar-php.mjs";
-import getSearchContent from "./templates/search-php.mjs";
-import getArchiveContent from "./templates/archive-php.mjs";
+import getIndexPhpCode from "./templates/index-php.mjs"; // index.php
+import getSidebarPhpCode from "./templates/sidebar-php.mjs"; // sidebar.php
+import getSearchPhpCode from "./templates/search-php.mjs"; // search.php
+import getArchivePhpCode from "./templates/archive-php.mjs"; // archive.php
 import get404Content from "./templates/404-php.mjs";
 import getCommentsContent from "./templates/comments-php.mjs";
 import getFooterContent from "./templates/footer-php.mjs";
@@ -207,15 +207,15 @@ const main = () => {
     getStylesheetHeader(brixConfig).concat(getStyleRtlCssCode())
   );
   createFile("404", "php", get404Content(brixConfig));
-  createFile("archive", "php", getArchiveContent(brixConfig));
+  createFile("archive", "php", getArchivePhpCode(brixConfig));
   createFile("comments", "php", getCommentsContent(brixConfig));
   createFile("footer", "php", getFooterContent(brixConfig));
   createFile("functions", "php", getFunctionsPhpCode(brixConfig));
   createFile("header", "php", getHeaderContent(brixConfig));
   createFile("index", "php", getIndexPhpCode(brixConfig));
   createFile("page", "php", getPageContent(brixConfig));
-  createFile("search", "php", getSearchContent(brixConfig));
-  createFile("sidebar", "php", getSidebarContent(brixConfig));
+  createFile("search", "php", getSearchPhpCode(brixConfig));
+  createFile("sidebar", "php", getSidebarPhpCode(brixConfig));
   createFile("single", "php", getSingleContent(brixConfig));
 
   fs.mkdirSync(process.cwd() + "/inc");

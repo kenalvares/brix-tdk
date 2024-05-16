@@ -1,5 +1,8 @@
-const getArchiveContent = obj => {
-    return `
+/*
+    archive.php
+*/
+const getArchivePhpCode = obj => {
+return `
 <?php
 /**
  * The template for displaying archive pages
@@ -54,4 +57,4 @@ get_footer();
 `
 }
 
-export default getArchiveContent;
+export default getArchivePhpCode;

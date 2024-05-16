@@ -1,5 +1,8 @@
-const getSidebarContent = obj => {
-    return `
+/*
+    sidebar.php
+*/
+const getSidebarPhpCode = obj => {
+return `
 <?php
 /**
  * The sidebar containing the main widget area
@@ -20,4 +23,4 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 `;
 }
 
-export default getSidebarContent;
+export default getSidebarPhpCode;
