@@ -26,8 +26,8 @@ import get404PhpCode from "./templates/404-php.mjs"; // 404.php
 import getCommentsPhpCode from "./templates/comments-php.mjs"; // comments.php
 import getFooterPhpCode from "./templates/footer-php.mjs"; // footer.php
 import getHeaderPhpCode from "./templates/header-php.mjs"; // header.php
-import getPageContent from "./templates/page-php.mjs";
-import getSingleContent from "./templates/single-php.mjs";
+import getPagePhpCode from "./templates/page-php.mjs"; // page.php
+import getSinglePhpCode from "./templates/single-php.mjs"; // single.php
 
 import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
 import getCustomizerContent from "./templates/inc/customizer-php.mjs";
@@ -217,10 +217,10 @@ const main = () => {
   createFile("functions", "php", getFunctionsPhpCode(brixConfig));
   createFile("header", "php", getHeaderPhpCode(brixConfig));
   createFile("index", "php", getIndexPhpCode(brixConfig));
-  createFile("page", "php", getPageContent(brixConfig));
+  createFile("page", "php", getPagePhpCode(brixConfig));
   createFile("search", "php", getSearchPhpCode(brixConfig));
   createFile("sidebar", "php", getSidebarPhpCode(brixConfig));
-  createFile("single", "php", getSingleContent(brixConfig));
+  createFile("single", "php", getSinglePhpCode(brixConfig));
 
   fs.mkdirSync(process.cwd() + "/inc");
   process.chdir(process.cwd() + "/inc");

@@ -1,5 +1,8 @@
-const getSingleContent = obj => {
-    return `
+/*
+    single.php
+*/
+const getSinglePhpCode = obj => {
+return `
 <?php
 /**
  * The template for displaying all single posts
@@ -43,4 +46,4 @@ get_footer();
 `;
 }
 
-export default getSingleContent;
+export default getSinglePhpCode;

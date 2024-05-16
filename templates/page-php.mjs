@@ -1,5 +1,8 @@
-const getPageContent = obj => {
-    return `
+/*
+    page.php
+*/
+const getPagePhpCode = obj => {
+return `
 <?php
 /**
  * The template for displaying all pages
@@ -41,4 +44,4 @@ get_footer();
 `;
 }
 
-export default getPageContent;
+export default getPagePhpCode;
