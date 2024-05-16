@@ -18,21 +18,21 @@ return `
 		<?php if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php
-			sample_posted_on();
-			sample_posted_by();
+			${obj.themeSlug}_posted_on();
+			${obj.themeSlug}_posted_by();
 			?>
 		</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php sample_post_thumbnail(); ?>
+	<?php ${obj.themeSlug}_post_thumbnail(); ?>
 
 	<div class="entry-summary">
 		<?php the_excerpt(); ?>
 	</div><!-- .entry-summary -->
 
 	<footer class="entry-footer">
-		<?php sample_entry_footer(); ?>
+		<?php ${obj.themeSlug}_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
 `;

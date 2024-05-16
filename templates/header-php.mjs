@@ -25,7 +25,7 @@ const getHeaderContent = obj => {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'sample' ); ?></a>
+<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', '${obj.themeSlug}' ); ?></a>
 
 <header id="masthead" class="site-header">
     <div class="site-branding">
@@ -40,15 +40,15 @@ const getHeaderContent = obj => {
             <p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
             <?php
         endif;
-        $sample_description = get_bloginfo( 'description', 'display' );
-        if ( $sample_description || is_customize_preview() ) :
+        $${obj.themeSlug}_description = get_bloginfo( 'description', 'display' );
+        if ( $${obj.themeSlug}_description || is_customize_preview() ) :
             ?>
-            <p class="site-description"><?php echo $sample_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+            <p class="site-description"><?php echo $${obj.themeSlug}_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
         <?php endif; ?>
     </div><!-- .site-branding -->
 
     <nav id="site-navigation" class="main-navigation">
-        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'sample' ); ?></button>
+        <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', '${obj.themeSlug}' ); ?></button>
         <?php
         wp_nav_menu(
             array(

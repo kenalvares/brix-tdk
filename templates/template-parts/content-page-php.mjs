@@ -16,7 +16,7 @@ return `
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
 
-	<?php sample_post_thumbnail(); ?>
+	<?php ${obj.themeSlug}_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -24,7 +24,7 @@ return `
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'sample' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', '${obj.themeSlug}' ),
 				'after'  => '</div>',
 			)
 		);
@@ -38,7 +38,7 @@ return `
 				sprintf(
 					wp_kses(
 						/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Edit <span class="screen-reader-text">%s</span>', 'sample' ),
+						__( 'Edit <span class="screen-reader-text">%s</span>', '${obj.themeSlug}' ),
 						array(
 							'span' => array(
 								'class' => array(),

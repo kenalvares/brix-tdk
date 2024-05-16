@@ -13,7 +13,7 @@ return `
 
 <section class="no-results not-found">
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'sample' ); ?></h1>
+		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', '${obj.themeSlug}' ); ?></h1>
 	</header><!-- .page-header -->
 
 	<div class="page-content">
@@ -23,7 +23,7 @@ return `
 			printf(
 				'<p>' . wp_kses(
 					/* translators: 1: link to WP admin new post page. */
-					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'sample' ),
+					__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', '${obj.themeSlug}' ),
 					array(
 						'a' => array(
 							'href' => array(),
@@ -36,14 +36,14 @@ return `
 		elseif ( is_search() ) :
 			?>
 
-			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'sample' ); ?></p>
+			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', '${obj.themeSlug}' ); ?></p>
 			<?php
 			get_search_form();
 
 		else :
 			?>
 
-			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'sample' ); ?></p>
+			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', '${obj.themeSlug}' ); ?></p>
 			<?php
 			get_search_form();
 

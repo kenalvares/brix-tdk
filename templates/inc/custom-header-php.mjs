@@ -16,33 +16,33 @@ const getCustomHeaderContent = obj => {
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses sample_header_style()
+ * @uses ${obj.themeSlug}_header_style()
  */
-function sample_custom_header_setup() {
+function ${obj.themeSlug}_custom_header_setup() {
 	add_theme_support(
 		'custom-header',
 		apply_filters(
-			'sample_custom_header_args',
+			'${obj.themeSlug}_custom_header_args',
 			array(
 				'default-image'      => '',
 				'default-text-color' => '000000',
 				'width'              => 1000,
 				'height'             => 250,
 				'flex-height'        => true,
-				'wp-head-callback'   => 'sample_header_style',
+				'wp-head-callback'   => '${obj.themeSlug}_header_style',
 			)
 		)
 	);
 }
-add_action( 'after_setup_theme', 'sample_custom_header_setup' );
+add_action( 'after_setup_theme', '${obj.themeSlug}_custom_header_setup' );
 
-if ( ! function_exists( 'sample_header_style' ) ) :
+if ( ! function_exists( '${obj.themeSlug}_header_style' ) ) :
 	/**
 	 * Styles the header image and text displayed on the blog.
 	 *
-	 * @see sample_custom_header_setup().
+	 * @see ${obj.themeSlug}_custom_header_setup().
 	 */
-	function sample_header_style() {
+	function ${obj.themeSlug}_header_style() {
 		$header_text_color = get_header_textcolor();
 
 		/*

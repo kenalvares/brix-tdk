@@ -24,14 +24,14 @@ return `
 			?>
 			<div class="entry-meta">
 				<?php
-				sample_posted_on();
-				sample_posted_by();
+				${obj.themeSlug}_posted_on();
+				${obj.themeSlug}_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php sample_post_thumbnail(); ?>
+	<?php ${obj.themeSlug}_post_thumbnail(); ?>
 
 	<div class="entry-content">
 		<?php
@@ -39,7 +39,7 @@ return `
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'sample' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', '${obj.themeSlug}' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -52,7 +52,7 @@ return `
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'sample' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', '${obj.themeSlug}' ),
 				'after'  => '</div>',
 			)
 		);
@@ -60,7 +60,7 @@ return `
 	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
-		<?php sample_entry_footer(); ?>
+		<?php ${obj.themeSlug}_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
 `;
