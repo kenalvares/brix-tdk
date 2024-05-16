@@ -1,5 +1,5 @@
 // style.css
-const getMainStyles = obj => {
+const getStyleCssCode = obj => {
   return `
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
@@ -949,4 +949,4 @@ textarea {
 `;
 }
 
-export default getMainStyles;
+export default getStyleCssCode;

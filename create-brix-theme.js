@@ -5,11 +5,18 @@ import * as fs from "fs";
 import _ from "lodash";
 import promptSync from "prompt-sync";
 import child_process from "child_process";
-import { removeWhiteSpaces, goUpFolder } from "./helpers/formatters.mjs";
+
+let brixConfig = {};
+let source = "";
+const prompt = promptSync({ sigint: true });
+
+import { removeWhiteSpaces, removeLastFolder } from "./helpers/formatters.mjs"; // Formatting related functions
 import { createFile } from "./helpers/file-managers.mjs";
-import getStylesheetHeader from "./templates/style-head.mjs";
-import getMainStyles from "./templates/style.mjs";
+
+import getStylesheetHeader from "./templates/style-head.mjs"; 
+import getStyleCssCode from "./templates/style-css.mjs";
 import getRtlStyles from "./templates/style-rtl.mjs";
+
 import getFunctionsContent from "./templates/functions-php.mjs";
 import getIndexContent from "./templates/index-php.mjs";
 import getSidebarContent from "./templates/sidebar-php.mjs";
@@ -45,9 +52,6 @@ import getComponentsDirScssContent from "./scss/components/components-dir-scss.m
 import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs";
 import getPackageJsonContent from "./templates/package-json.mjs";
 import getGulpfileJsContent from "./templates/gulpfile-js.mjs";
-let brixConfig = {};
-let source = "";
-const prompt = promptSync({ sigint: true });
 
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 const getThemeName = () => {
@@ -62,7 +66,7 @@ const getThemeName = () => {
 };
 
 // Returns the path to the newly generated theme
-const getThemePath = (str) => path.join(goUpFolder(source), str)
+const getThemePath = (str) => path.join(removeLastFolder(source), str)
 
 // Returns Theme URI after basic formatting and validation
 const getThemeUri = () => {
@@ -195,7 +199,7 @@ const main = () => {
   createFile(
     "style",
     "css",
-    getStylesheetHeader(brixConfig).concat(getMainStyles())
+    getStylesheetHeader(brixConfig).concat(getStyleCssCode())
   );
   createFile(
     "style-rtl",
