@@ -22,23 +22,27 @@ import getIndexPhpCode from "./templates/index-php.mjs"; // index.php
 import getSidebarPhpCode from "./templates/sidebar-php.mjs"; // sidebar.php
 import getSearchPhpCode from "./templates/search-php.mjs"; // search.php
 import getArchivePhpCode from "./templates/archive-php.mjs"; // archive.php
-import get404PhpCode from "./templates/404-php.mjs";
-import getCommentsContent from "./templates/comments-php.mjs";
+import get404PhpCode from "./templates/404-php.mjs"; // 404.php
+import getCommentsPhpCode from "./templates/comments-php.mjs"; // comments.php
 import getFooterContent from "./templates/footer-php.mjs";
 import getHeaderContent from "./templates/header-php.mjs";
 import getPageContent from "./templates/page-php.mjs";
 import getSingleContent from "./templates/single-php.mjs";
+
 import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
 import getCustomizerContent from "./templates/inc/customizer-php.mjs";
 import getJetpackContent from "./templates/inc/jetpack-php.mjs";
 import getTemplateFunctionsContent from "./templates/inc/template-functions-php.mjs";
 import getTemplateTagsContent from "./templates/inc/template-tags-php.mjs";
+
 import getCustomizerJsContent from "./templates/js/customizer-js.mjs";
 import getNavigationJsContent from "./templates/js/navigation-js.mjs";
+
 import getTemplatePartsContentContent from "./templates/template-parts/content-php.mjs";
 import getTemplatePartsContentNoneContent from "./templates/template-parts/content-none-php.mjs";
 import getTemplatePartsContentPageContent from "./templates/template-parts/content-page-php.mjs";
 import getTemplatePartsContentSearchContent from "./templates/template-parts/content-search-php.mjs";
+
 import getStylesScssContent from "./scss/styles-scss.mjs";
 import getVendorDirScssContent from "./scss/vendors/vendor-dir-scss.mjs";
 import getAbstractsDirScssContent from "./scss/abstracts/abstracts-dir-scss.mjs";
@@ -208,7 +212,7 @@ const main = () => {
   );
   createFile("404", "php", get404PhpCode(brixConfig));
   createFile("archive", "php", getArchivePhpCode(brixConfig));
-  createFile("comments", "php", getCommentsContent(brixConfig));
+  createFile("comments", "php", getCommentsPhpCode(brixConfig));
   createFile("footer", "php", getFooterContent(brixConfig));
   createFile("functions", "php", getFunctionsPhpCode(brixConfig));
   createFile("header", "php", getHeaderContent(brixConfig));

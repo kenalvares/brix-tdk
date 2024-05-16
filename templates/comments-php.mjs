@@ -1,5 +1,8 @@
-const getCommentsContent = obj => {
-    return `
+/*
+    comments.php
+*/
+const getCommentsPhpCode = obj => {
+return `
 <?php
 /**
  * The template for displaying comments
@@ -80,4 +83,4 @@ if ( post_password_required() ) {
 `;
 }
 
-export default getCommentsContent;
+export default getCommentsPhpCode;
