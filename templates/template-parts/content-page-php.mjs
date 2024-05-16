@@ -1,4 +1,7 @@
-const getTemplatePartsContentPageContent = obj => {
+/*
+    template-parts/content-page.php
+*/
+const getTemplatePartsContentPagePhpCode = obj => {
 return `
 <?php
 /**
@@ -57,4 +60,4 @@ return `
 `;
 }
 
-export default getTemplatePartsContentPageContent;
+export default getTemplatePartsContentPagePhpCode;

@@ -38,10 +38,10 @@ import getTemplateTagsPhpCode from "./templates/inc/template-tags-php.mjs"; // t
 import getCustomizerJsCode from "./templates/js/customizer-js.mjs"; // customizer.js
 import getNavigationJsCode from "./templates/js/navigation-js.mjs"; // navigation.js
 
-import getTemplatePartsContentContent from "./templates/template-parts/content-php.mjs";
-import getTemplatePartsContentNoneContent from "./templates/template-parts/content-none-php.mjs";
-import getTemplatePartsContentPageContent from "./templates/template-parts/content-page-php.mjs";
-import getTemplatePartsContentSearchContent from "./templates/template-parts/content-search-php.mjs";
+import getTemplatePartsContentPhpCode from "./templates/template-parts/content-php.mjs"; // template-parts/content.php
+import getTemplatePartsContentNonePhpCode from "./templates/template-parts/content-none-php.mjs"; // template-parts/content-none.php
+import getTemplatePartsContentPagePhpCode from "./templates/template-parts/content-page-php.mjs"; // template-parts/content-page.php
+import getTemplatePartsContentSearchPhpCode from "./templates/template-parts/content-search-php.mjs"; // template-parts/content-search.php
 
 import getStylesScssContent from "./scss/styles-scss.mjs";
 import getVendorDirScssContent from "./scss/vendors/vendor-dir-scss.mjs";
@@ -244,21 +244,21 @@ const main = () => {
   process.chdir("..");
   fs.mkdirSync(process.cwd() + "/template-parts");
   process.chdir(process.cwd() + "/template-parts");
-  createFile("content", "php", getTemplatePartsContentContent(brixConfig));
+  createFile("content", "php", getTemplatePartsContentPhpCode(brixConfig));
   createFile(
     "content-none",
     "php",
-    getTemplatePartsContentNoneContent(brixConfig)
+    getTemplatePartsContentNonePhpCode(brixConfig)
   );
   createFile(
     "content-page",
     "php",
-    getTemplatePartsContentPageContent(brixConfig)
+    getTemplatePartsContentPagePhpCode(brixConfig)
   );
   createFile(
     "content-search",
     "php",
-    getTemplatePartsContentSearchContent(brixConfig)
+    getTemplatePartsContentSearchPhpCode(brixConfig)
   );
 
   process.chdir("..");

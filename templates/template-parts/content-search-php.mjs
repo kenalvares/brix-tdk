@@ -1,4 +1,7 @@
-const getTemplatePartsContentSearchContent = obj => {
+/*
+    template-parts/content-search.php
+*/
+const getTemplatePartsContentSearchPhpCode = obj => {
 return `
 <?php
 /**
@@ -38,4 +41,4 @@ return `
 `;
 }
 
-export default getTemplatePartsContentSearchContent;
+export default getTemplatePartsContentSearchPhpCode;
