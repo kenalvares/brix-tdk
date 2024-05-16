@@ -17,8 +17,8 @@ import getStylesheetHeader from "./templates/style-head.mjs"; // Header for styl
 import getStyleCssCode from "./templates/style-css.mjs"; // style.css
 import getStyleRtlCssCode from "./templates/style-rtl-css.mjs"; //style-rtl.css
 
-import getFunctionsContent from "./templates/functions-php.mjs";
-import getIndexContent from "./templates/index-php.mjs";
+import getFunctionsPhpCode from "./templates/functions-php.mjs"; // functions.php
+import getIndexPhpCode from "./templates/index-php.mjs"; //index.php
 import getSidebarContent from "./templates/sidebar-php.mjs";
 import getSearchContent from "./templates/search-php.mjs";
 import getArchiveContent from "./templates/archive-php.mjs";
@@ -210,9 +210,9 @@ const main = () => {
   createFile("archive", "php", getArchiveContent(brixConfig));
   createFile("comments", "php", getCommentsContent(brixConfig));
   createFile("footer", "php", getFooterContent(brixConfig));
-  createFile("functions", "php", getFunctionsContent(brixConfig));
+  createFile("functions", "php", getFunctionsPhpCode(brixConfig));
   createFile("header", "php", getHeaderContent(brixConfig));
-  createFile("index", "php", getIndexContent(brixConfig));
+  createFile("index", "php", getIndexPhpCode(brixConfig));
   createFile("page", "php", getPageContent(brixConfig));
   createFile("search", "php", getSearchContent(brixConfig));
   createFile("sidebar", "php", getSidebarContent(brixConfig));

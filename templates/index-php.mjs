@@ -1,6 +1,8 @@
-// index.php
-const getIndexContent = obj => {
-    return `
+/*
+    index.php
+*/
+const getIndexPhpCode = obj => {
+return `
 <?php
 /**
  * The main template file
@@ -59,6 +61,6 @@ get_header();
 get_sidebar();
 get_footer();
 `;
-  }
+}
 
-  export default getIndexContent;
+export default getIndexPhpCode;
