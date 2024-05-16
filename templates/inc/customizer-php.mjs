@@ -1,5 +1,8 @@
-const getCustomizerContent = obj => {
-    return `
+/*
+    customizer.php
+*/
+const getCustomizerPhpCode = obj => {
+return `
 <?php
 /**
  * ${obj.themeSlug} Theme Customizer
@@ -64,4 +67,4 @@ add_action( 'customize_preview_init', '${obj.themeSlug}_customize_preview_js' );
 `;
 }
 
-export default getCustomizerContent;
+export default getCustomizerPhpCode;

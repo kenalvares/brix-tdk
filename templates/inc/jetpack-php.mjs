@@ -1,5 +1,8 @@
-const getJetpackContent = obj => {
-    return `
+/*
+    jetpack.php
+*/
+const getJetpackPhpCode = obj => {
+return `
 <?php
 /**
  * Jetpack Compatibility File
@@ -70,4 +73,4 @@ endif;
 `;
 }
 
-export default getJetpackContent;
+export default getJetpackPhpCode;

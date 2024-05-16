@@ -1,4 +1,7 @@
-const getTemplateTagsContent = obj => {
+/*
+    template-tags.php
+*/
+const getTemplateTagsPhpCode = obj => {
 return `
 <?php
 /**
@@ -168,4 +171,4 @@ endif;
 `;
 }
 
-export default getTemplateTagsContent;
+export default getTemplateTagsPhpCode;

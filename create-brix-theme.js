@@ -29,11 +29,11 @@ import getHeaderPhpCode from "./templates/header-php.mjs"; // header.php
 import getPagePhpCode from "./templates/page-php.mjs"; // page.php
 import getSinglePhpCode from "./templates/single-php.mjs"; // single.php
 
-import getCustomHeaderContent from "./templates/inc/custom-header-php.mjs";
-import getCustomizerContent from "./templates/inc/customizer-php.mjs";
-import getJetpackContent from "./templates/inc/jetpack-php.mjs";
-import getTemplateFunctionsContent from "./templates/inc/template-functions-php.mjs";
-import getTemplateTagsContent from "./templates/inc/template-tags-php.mjs";
+import getCustomHeaderPhpCode from "./templates/inc/custom-header-php.mjs"; // custom-header.php
+import getCustomizerPhpCode from "./templates/inc/customizer-php.mjs"; // customizer.php
+import getJetpackPhpCode from "./templates/inc/jetpack-php.mjs"; // jetpack.php
+import getTemplateFunctionsPhpCode from "./templates/inc/template-functions-php.mjs";
+import getTemplateTagsPhpCode from "./templates/inc/template-tags-php.mjs";
 
 import getCustomizerJsContent from "./templates/js/customizer-js.mjs";
 import getNavigationJsContent from "./templates/js/navigation-js.mjs";
@@ -225,15 +225,15 @@ const main = () => {
   fs.mkdirSync(process.cwd() + "/inc");
   process.chdir(process.cwd() + "/inc");
 
-  createFile("custom-header", "php", getCustomHeaderContent(brixConfig));
-  createFile("customizer", "php", getCustomizerContent(brixConfig));
-  createFile("jetpack", "php", getJetpackContent(brixConfig));
+  createFile("custom-header", "php", getCustomHeaderPhpCode(brixConfig));
+  createFile("customizer", "php", getCustomizerPhpCode(brixConfig));
+  createFile("jetpack", "php", getJetpackPhpCode(brixConfig));
   createFile(
     "template-functions",
     "php",
-    getTemplateFunctionsContent(brixConfig)
+    getTemplateFunctionsPhpCode(brixConfig)
   );
-  createFile("template-tags", "php", getTemplateTagsContent(brixConfig));
+  createFile("template-tags", "php", getTemplateTagsPhpCode(brixConfig));
 
   process.chdir("..");
   fs.mkdirSync(process.cwd() + "/js");

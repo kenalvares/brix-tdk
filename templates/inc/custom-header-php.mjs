@@ -1,5 +1,8 @@
-const getCustomHeaderContent = obj => {
-    return `
+/*
+    custom-header.php
+*/
+const getCustomHeaderPhpCode = obj => {
+return `
 <?php
 /**
  * Sample implementation of the Custom Header feature
@@ -81,4 +84,4 @@ endif;
 `;
 }
 
-export default getCustomHeaderContent;
+export default getCustomHeaderPhpCode;
