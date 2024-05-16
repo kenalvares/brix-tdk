@@ -22,7 +22,7 @@ import getIndexPhpCode from "./templates/index-php.mjs"; // index.php
 import getSidebarPhpCode from "./templates/sidebar-php.mjs"; // sidebar.php
 import getSearchPhpCode from "./templates/search-php.mjs"; // search.php
 import getArchivePhpCode from "./templates/archive-php.mjs"; // archive.php
-import get404Content from "./templates/404-php.mjs";
+import get404PhpCode from "./templates/404-php.mjs";
 import getCommentsContent from "./templates/comments-php.mjs";
 import getFooterContent from "./templates/footer-php.mjs";
 import getHeaderContent from "./templates/header-php.mjs";
@@ -206,7 +206,7 @@ const main = () => {
     "css",
     getStylesheetHeader(brixConfig).concat(getStyleRtlCssCode())
   );
-  createFile("404", "php", get404Content(brixConfig));
+  createFile("404", "php", get404PhpCode(brixConfig));
   createFile("archive", "php", getArchivePhpCode(brixConfig));
   createFile("comments", "php", getCommentsContent(brixConfig));
   createFile("footer", "php", getFooterContent(brixConfig));

@@ -1,4 +1,7 @@
-const get404Content = obj => {
+/*
+    404.php
+*/
+const get404PhpCode = obj => {
 return `
 <?php
 /**
@@ -61,4 +64,4 @@ get_footer();
 `;
 }
 
-export default get404Content;
+export default get404PhpCode;
