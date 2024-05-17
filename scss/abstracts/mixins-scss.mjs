@@ -13,7 +13,7 @@ Mixins
 @mixin box($width, $height: $width) {
     width: $width;
     height: $height;
-  }
+}
 
 // Defines font-size, line-height and letter-spacing. Usage:
 // p {

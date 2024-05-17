@@ -41,19 +41,19 @@ import getTemplatePartsContentNonePhpCode from "./templates/template-parts/conte
 import getTemplatePartsContentPagePhpCode from "./templates/template-parts/content-page-php.mjs"; // template-parts/content-page.php
 import getTemplatePartsContentSearchPhpCode from "./templates/template-parts/content-search-php.mjs"; // template-parts/content-search.php
 
-import getStylesScssContent from "./scss/styles-scss.mjs";
-import getVendorDirScssContent from "./scss/vendors/vendor-dir-scss.mjs";
-import getAbstractsDirScssContent from "./scss/abstracts/abstracts-dir-scss.mjs";
-import getFontsScssContent from "./scss/abstracts/fonts-scss.mjs";
-import getVariablesScssContent from "./scss/abstracts/variables-scss.mjs";
-import getMixinsScssContent from "./scss/abstracts/mixins-scss.mjs";
-import getBaseDirScssContent from "./scss/base/base-dir-scss.mjs";
-import getResetScssContent from "./scss/reset-scss.mjs";
-import getTypographyScssContent from "./scss/base/typography-scss.mjs";
-import getComponentsDirScssContent from "./scss/components/components-dir-scss.mjs";
-import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs";
-import getPackageJsonContent from "./templates/package-json.mjs";
-import getGulpfileJsContent from "./templates/gulpfile-js.mjs";
+import getStylesScssCode from "./scss/styles-scss.mjs"; // styles.scss
+import getVendorDirScssCode from "./scss/vendors/vendor-dir-scss.mjs"; // __vendor-dir.scss
+import getAbstractsDirScssCode from "./scss/abstracts/abstracts-dir-scss.mjs"; // __abstracts-dir.scss
+import getFontsScssCode from "./scss/abstracts/fonts-scss.mjs"; // _fonts.scss
+import getVariablesScssCode from "./scss/abstracts/variables-scss.mjs"; // _variables.scss
+import getMixinsScssContent from "./scss/abstracts/mixins-scss.mjs"; // _mixins.scss
+import getBaseDirScssContent from "./scss/base/base-dir-scss.mjs"; // __base-dir.scss
+import getResetScssContent from "./scss/reset-scss.mjs"; // _reset.scss
+import getTypographyScssContent from "./scss/base/typography-scss.mjs"; // _typography.scss
+import getComponentsDirScssContent from "./scss/components/components-dir-scss.mjs"; // __components-dir.scss
+import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs"; // __layouts-dir.scss
+import getPackageJsonContent from "./templates/package-json.mjs"; // package.json
+import getGulpfileJsContent from "./templates/gulpfile-js.mjs"; // gulpfile.js
 
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 const getThemeName = () => {
@@ -272,9 +272,9 @@ const main = () => {
 
   fs.mkdirSync(process.cwd() + "/abstracts");
   process.chdir(process.cwd() + "/abstracts");
-  createFile("__abstracts-dir", "scss", getAbstractsDirScssContent(brixConfig));
-  createFile("_fonts", "scss", getFontsScssContent(brixConfig));
-  createFile("_variables", "scss", getVariablesScssContent(brixConfig));
+  createFile("__abstracts-dir", "scss", getAbstractsDirScssCode(brixConfig));
+  createFile("_fonts", "scss", getFontsScssCode(brixConfig));
+  createFile("_variables", "scss", getVariablesScssCode(brixConfig));
   createFile("_mixins", "scss", getMixinsScssContent(brixConfig));
 
   process.chdir("..");
@@ -300,11 +300,11 @@ const main = () => {
   process.chdir("..");
   fs.mkdirSync(process.cwd() + "/vendor");
   process.chdir(process.cwd() + "/vendor");
-  createFile("__vendor-dir", "scss", getVendorDirScssContent(brixConfig));
+  createFile("__vendor-dir", "scss", getVendorDirScssCode(brixConfig));
 
   process.chdir("..");
   createFile("_reset", "scss", getResetScssContent(brixConfig));
-  createFile("styles", "scss", getStylesScssContent(brixConfig));
+  createFile("styles", "scss", getStylesScssCode(brixConfig));
 
   console.log(
     `\n\n'${brixConfig.themeName}' is ready. Try:\ncd "../${brixConfig.themeName}-dev" && gulp`

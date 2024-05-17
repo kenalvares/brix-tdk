@@ -1,4 +1,4 @@
-const getAbstractsDirScssContent = obj => {
+const getAbstractsDirScssCode = obj => {
 return `
 @use "fonts";
 @use "variables";
@@ -7,4 +7,4 @@ return `
 `;
 }
 
-export default getAbstractsDirScssContent;
+export default getAbstractsDirScssCode;

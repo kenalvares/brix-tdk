@@ -1,7 +1,7 @@
-const getFontsScssContent = obj => {
+const getFontsScssCode = obj => {
 return `/*
 Font Imports
 */`;
 }
 
-export default getFontsScssContent;
+export default getFontsScssCode;

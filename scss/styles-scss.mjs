@@ -1,4 +1,4 @@
-const getStylesScssContent = obj => {
+const getStylesScssCode = obj => {
 return `
 @charset 'utf-8';
 
@@ -49,4 +49,4 @@ Layout - This file is used to contain all layout imports. Files inside this fold
 @use "layouts/__layouts-dir";`
 }
 
-export default getStylesScssContent;
+export default getStylesScssCode;
