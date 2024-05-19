@@ -182,6 +182,7 @@ const createConfig = (obj) => {
 
 // Main function
 const main = () => {
+  // Setup brix-config
   source = process.cwd();
   brixConfig.themeName = getThemeName();
   const themePath = getThemePath(brixConfig.themeName);
@@ -197,11 +198,14 @@ const main = () => {
   brixConfig.themeRequiredPhp = getThemeRequiredPhp();
   brixConfig.themeLicenseName = getThemeLicenseName();
   brixConfig.themeLicenseUri = getThemeLicenseUri();
-
+ 
+  // Create Theme and dev folders
   createThemeFolders(brixConfig.themeName, themePath);
 
+  // Create brix-config
   createConfig(brixConfig);
 
+  // Create template files
   createFile(
     "style-rtl",
     "css",
@@ -257,6 +261,7 @@ const main = () => {
     getTemplatePartsContentSearchPhpCode(brixConfig)
   );
 
+  // Create dev files
   process.chdir("..");
   process.chdir("..");
   process.chdir(process.cwd() + "/" + brixConfig.themeName + "-dev");
@@ -306,6 +311,7 @@ const main = () => {
   createFile("_reset", "scss", getResetScssContent(brixConfig));
   createFile("styles", "scss", getStylesScssCode(brixConfig));
 
+  // Next steps for user
   console.log(
     `\n\n'${brixConfig.themeName}' is ready. Try:\ncd "../${brixConfig.themeName}-dev" && gulp`
   );
