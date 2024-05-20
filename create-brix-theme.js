@@ -186,7 +186,6 @@ const main = () => {
   source = process.cwd();
   brixConfig.themeName = getThemeName();
   const themePath = getThemePath(brixConfig.themeName);
-  console.log(themePath);
   brixConfig.themeSlug = _.snakeCase(brixConfig.themeName);
   brixConfig.themeUri = getThemeUri();
   brixConfig.themeAuthorName = getThemeAuthorName();
@@ -267,7 +266,7 @@ const main = () => {
   process.chdir(process.cwd() + "/" + brixConfig.themeName + "-dev");
   createFile("package", "json", getPackageJsonContent(brixConfig));
   child_process.execSync(
-    "npm install --save-dev gulp sass gulp-sass gulp-concat process",
+    "npm install --save-dev gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
     { stdio: [0, 1, 2] }
   );
   createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));
