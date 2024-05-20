@@ -14,22 +14,22 @@ const sass = gulpSass(dartSass);
 function compileSass() {
   process.chdir("..");
   return gulp
-    .src(process.cwd() + "/myTheme-dev/scss/styles.scss") // Path to your SCSS files
+    .src(process.cwd() + "/${obj.themeName}-dev/scss/styles.scss") // Path to your SCSS files
     .pipe(sass().on("error", sass.logError))
     .pipe(concat("style.css"))
     .pipe(autoprefixer())
     .pipe(gcmq())
-    .pipe(gulp.dest(process.cwd() + "/myTheme")); // Output directory for CSS files
+    .pipe(gulp.dest(process.cwd() + "/${obj.themeName}")); // Output directory for CSS files
 }
 gulp.task("sass", compileSass);
 
 function compileJs() {
   return gulp
-    .src(process.cwd() + "/myTheme-dev/js/**/*.js") // Path to your JS file
+    .src(process.cwd() + "/${obj.themeName}-dev/js/**/*.js") // Path to your JS file
     .pipe(babel())
     .pipe(uglify())
     .pipe(concat("all.js"))
-    .pipe(gulp.dest(process.cwd() + "/myTheme/js"));
+    .pipe(gulp.dest(process.cwd() + "/${obj.themeName}/js"));
 }
 
 function defaultTask(cb) {
