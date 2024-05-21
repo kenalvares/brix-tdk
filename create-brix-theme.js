@@ -10,7 +10,7 @@ let brixConfig = {};
 let source = "";
 const prompt = promptSync({ sigint: true });
 
-import { removeWhiteSpaces, removeLastFolder } from "./helpers/formatters.mjs"; // Formatting related functions
+import { removeWhiteSpaces, removeLastFolder, isUserInBrixFolder } from "./helpers/formatters.mjs"; // Formatting related functions
 import { createFile } from "./helpers/file-managers.mjs"; // File management functions
 
 import getStyleRtlCssCode from "./templates/style-rtl-css.mjs"; //style-rtl.css
@@ -184,136 +184,144 @@ const createConfig = (obj) => {
 const main = () => {
   // Setup brix-config
   source = process.cwd();
-  brixConfig.themeName = getThemeName();
-  const themePath = getThemePath(brixConfig.themeName);
-  brixConfig.themeSlug = _.snakeCase(brixConfig.themeName);
-  brixConfig.themeUri = getThemeUri();
-  brixConfig.themeAuthorName = getThemeAuthorName();
-  brixConfig.themeAuthorUri = getThemeAuthorUri();
-  brixConfig.themeDescription = getThemeDescription();
-  brixConfig.themeVersion = "1.0.0";
-  brixConfig.themeRequiredWp = getThemeRequiredWp();
-  brixConfig.themeTestedWp = getThemeTestedWp();
-  brixConfig.themeRequiredPhp = getThemeRequiredPhp();
-  brixConfig.themeLicenseName = getThemeLicenseName();
-  brixConfig.themeLicenseUri = getThemeLicenseUri();
- 
-  // Create Theme and dev folders
-  createThemeFolders(brixConfig.themeName, themePath);
-
-  // Create brix-config
-  createConfig(brixConfig);
-
-  // Create template files
-  createFile(
-    "style-rtl",
-    "css",
-    getStyleRtlCssCode(brixConfig));
-  createFile("404", "php", get404PhpCode(brixConfig));
-  createFile("archive", "php", getArchivePhpCode(brixConfig));
-  createFile("comments", "php", getCommentsPhpCode(brixConfig));
-  createFile("footer", "php", getFooterPhpCode(brixConfig));
-  createFile("functions", "php", getFunctionsPhpCode(brixConfig));
-  createFile("header", "php", getHeaderPhpCode(brixConfig));
-  createFile("index", "php", getIndexPhpCode(brixConfig));
-  createFile("page", "php", getPagePhpCode(brixConfig));
-  createFile("search", "php", getSearchPhpCode(brixConfig));
-  createFile("sidebar", "php", getSidebarPhpCode(brixConfig));
-  createFile("single", "php", getSinglePhpCode(brixConfig));
-
-  fs.mkdirSync(process.cwd() + "/inc");
-  process.chdir(process.cwd() + "/inc");
-
-  createFile("custom-header", "php", getCustomHeaderPhpCode(brixConfig));
-  createFile("customizer", "php", getCustomizerPhpCode(brixConfig));
-  createFile("jetpack", "php", getJetpackPhpCode(brixConfig));
-  createFile(
-    "template-functions",
-    "php",
-    getTemplateFunctionsPhpCode(brixConfig)
-  );
-  createFile("template-tags", "php", getTemplateTagsPhpCode(brixConfig));
-
-  process.chdir("..");
-  fs.mkdirSync(process.cwd() + "/js");
-  process.chdir(process.cwd() + "/js");
-  createFile("customizer", "js", getCustomizerJsCode(brixConfig));
-  createFile("navigation", "js", getNavigationJsCode(brixConfig));
-
-  process.chdir("..");
-  fs.mkdirSync(process.cwd() + "/template-parts");
-  process.chdir(process.cwd() + "/template-parts");
-  createFile("content", "php", getTemplatePartsContentPhpCode(brixConfig));
-  createFile(
-    "content-none",
-    "php",
-    getTemplatePartsContentNonePhpCode(brixConfig)
-  );
-  createFile(
-    "content-page",
-    "php",
-    getTemplatePartsContentPagePhpCode(brixConfig)
-  );
-  createFile(
-    "content-search",
-    "php",
-    getTemplatePartsContentSearchPhpCode(brixConfig)
-  );
-
-  // Create dev files
-  process.chdir("..");
-  process.chdir("..");
-  process.chdir(process.cwd() + "/" + brixConfig.themeName + "-dev");
-  createFile("package", "json", getPackageJsonContent(brixConfig));
-  child_process.execSync(
-    "npm install --save-dev gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
-    { stdio: [0, 1, 2] }
-  );
-  createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));
-
-  fs.mkdirSync(process.cwd() + "/scss");
-  process.chdir(process.cwd() + "/scss");
-
-  fs.mkdirSync(process.cwd() + "/abstracts");
-  process.chdir(process.cwd() + "/abstracts");
-  createFile("__abstracts-dir", "scss", getAbstractsDirScssCode(brixConfig));
-  createFile("_fonts", "scss", getFontsScssCode(brixConfig));
-  createFile("_variables", "scss", getVariablesScssCode(brixConfig));
-  createFile("_mixins", "scss", getMixinsScssContent(brixConfig));
-
-  process.chdir("..");
-  fs.mkdirSync(process.cwd() + "/base");
-  process.chdir(process.cwd() + "/base");
-  createFile("__base-dir", "scss", getBaseDirScssContent(brixConfig));
-  createFile("_typography", "scss", getTypographyScssContent(brixConfig));
-
-  process.chdir("..");
-  fs.mkdirSync(process.cwd() + "/components");
-  process.chdir(process.cwd() + "/components");
-  createFile(
-    "__components-dir",
-    "scss",
-    getComponentsDirScssContent(brixConfig)
-  );
-
-  process.chdir("..");
-  fs.mkdirSync(process.cwd() + "/layouts");
-  process.chdir(process.cwd() + "/layouts");
-  createFile("__layouts-dir", "scss", getLayoutsDirScssContent(brixConfig));
-
-  process.chdir("..");
-  fs.mkdirSync(process.cwd() + "/vendor");
-  process.chdir(process.cwd() + "/vendor");
-  createFile("__vendor-dir", "scss", getVendorDirScssCode(brixConfig));
-
-  process.chdir("..");
-  createFile("_reset", "scss", getResetScssContent(brixConfig));
-  createFile("styles", "scss", getStylesScssCode(brixConfig));
-
-  // Next steps for user
-  console.log(
-    `\n\n'${brixConfig.themeName}' is ready. Try:\ncd "../${brixConfig.themeName}-dev" && gulp`
-  );
+  if(isUserInBrixFolder(source)) {
+    brixConfig.themeName = getThemeName();
+    const themePath = getThemePath(brixConfig.themeName);
+    brixConfig.themeSlug = _.snakeCase(brixConfig.themeName);
+    brixConfig.themeUri = getThemeUri();
+    brixConfig.themeAuthorName = getThemeAuthorName();
+    brixConfig.themeAuthorUri = getThemeAuthorUri();
+    brixConfig.themeDescription = getThemeDescription();
+    brixConfig.themeVersion = "1.0.0";
+    brixConfig.themeRequiredWp = getThemeRequiredWp();
+    brixConfig.themeTestedWp = getThemeTestedWp();
+    brixConfig.themeRequiredPhp = getThemeRequiredPhp();
+    brixConfig.themeLicenseName = getThemeLicenseName();
+    brixConfig.themeLicenseUri = getThemeLicenseUri();
+   
+    // Create Theme and dev folders
+    createThemeFolders(brixConfig.themeName, themePath);
+  
+    // Create brix-config
+    createConfig(brixConfig);
+  
+    // Create template files
+    createFile(
+      "style-rtl",
+      "css",
+      getStyleRtlCssCode(brixConfig));
+    createFile("404", "php", get404PhpCode(brixConfig));
+    createFile("archive", "php", getArchivePhpCode(brixConfig));
+    createFile("comments", "php", getCommentsPhpCode(brixConfig));
+    createFile("footer", "php", getFooterPhpCode(brixConfig));
+    createFile("functions", "php", getFunctionsPhpCode(brixConfig));
+    createFile("header", "php", getHeaderPhpCode(brixConfig));
+    createFile("index", "php", getIndexPhpCode(brixConfig));
+    createFile("page", "php", getPagePhpCode(brixConfig));
+    createFile("search", "php", getSearchPhpCode(brixConfig));
+    createFile("sidebar", "php", getSidebarPhpCode(brixConfig));
+    createFile("single", "php", getSinglePhpCode(brixConfig));
+  
+    fs.mkdirSync(process.cwd() + "/inc");
+    process.chdir(process.cwd() + "/inc");
+  
+    createFile("custom-header", "php", getCustomHeaderPhpCode(brixConfig));
+    createFile("customizer", "php", getCustomizerPhpCode(brixConfig));
+    createFile("jetpack", "php", getJetpackPhpCode(brixConfig));
+    createFile(
+      "template-functions",
+      "php",
+      getTemplateFunctionsPhpCode(brixConfig)
+    );
+    createFile("template-tags", "php", getTemplateTagsPhpCode(brixConfig));
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/js");
+    process.chdir(process.cwd() + "/js");
+    createFile("customizer", "js", getCustomizerJsCode(brixConfig));
+    createFile("navigation", "js", getNavigationJsCode(brixConfig));
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/template-parts");
+    process.chdir(process.cwd() + "/template-parts");
+    createFile("content", "php", getTemplatePartsContentPhpCode(brixConfig));
+    createFile(
+      "content-none",
+      "php",
+      getTemplatePartsContentNonePhpCode(brixConfig)
+    );
+    createFile(
+      "content-page",
+      "php",
+      getTemplatePartsContentPagePhpCode(brixConfig)
+    );
+    createFile(
+      "content-search",
+      "php",
+      getTemplatePartsContentSearchPhpCode(brixConfig)
+    );
+  
+    // Create dev files
+    process.chdir("..");
+    process.chdir("..");
+    process.chdir(process.cwd() + "/" + brixConfig.themeName + "-dev");
+    createFile("package", "json", getPackageJsonContent(brixConfig));
+    child_process.execSync(
+      "npm install --save-dev gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
+      { stdio: [0, 1, 2] }
+    );
+    createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));
+  
+    fs.mkdirSync(process.cwd() + "/scss");
+    process.chdir(process.cwd() + "/scss");
+  
+    fs.mkdirSync(process.cwd() + "/abstracts");
+    process.chdir(process.cwd() + "/abstracts");
+    createFile("__abstracts-dir", "scss", getAbstractsDirScssCode(brixConfig));
+    createFile("_fonts", "scss", getFontsScssCode(brixConfig));
+    createFile("_variables", "scss", getVariablesScssCode(brixConfig));
+    createFile("_mixins", "scss", getMixinsScssContent(brixConfig));
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/base");
+    process.chdir(process.cwd() + "/base");
+    createFile("__base-dir", "scss", getBaseDirScssContent(brixConfig));
+    createFile("_typography", "scss", getTypographyScssContent(brixConfig));
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/components");
+    process.chdir(process.cwd() + "/components");
+    createFile(
+      "__components-dir",
+      "scss",
+      getComponentsDirScssContent(brixConfig)
+    );
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/layouts");
+    process.chdir(process.cwd() + "/layouts");
+    createFile("__layouts-dir", "scss", getLayoutsDirScssContent(brixConfig));
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/vendor");
+    process.chdir(process.cwd() + "/vendor");
+    createFile("__vendor-dir", "scss", getVendorDirScssCode(brixConfig));
+  
+    process.chdir("..");
+    createFile("_reset", "scss", getResetScssContent(brixConfig));
+    createFile("styles", "scss", getStylesScssCode(brixConfig));
+  
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/js");
+    process.chdir(process.cwd() + "/js");
+  
+    // Next steps for user
+    console.log(
+      `\n\n'${brixConfig.themeName}' is ready. Try:\ncd "../${brixConfig.themeName}-dev" && gulp`
+    );
+    return 0;
+  }
+  return 1;
 };
 
 main();
