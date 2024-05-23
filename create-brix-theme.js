@@ -10,7 +10,11 @@ let brixConfig = {};
 let source = "";
 const prompt = promptSync({ sigint: true });
 
-import { removeWhiteSpaces, removeLastFolder, isUserInBrixFolder } from "./helpers/formatters.mjs"; // Formatting related functions
+import {
+  removeWhiteSpaces,
+  removeLastFolder,
+  isUserInBrixFolder,
+} from "./helpers/formatters.mjs"; // Formatting related functions
 import { createFile } from "./helpers/file-managers.mjs"; // File management functions
 
 import getStyleRtlCssCode from "./templates/style-rtl-css.mjs"; //style-rtl.css
@@ -58,9 +62,7 @@ import getGulpfileJsContent from "./templates/gulpfile-js.mjs"; // gulpfile.js
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 const getThemeName = () => {
   if (process.argv.length < 3 || process.argv.length > 3) {
-    console.log("(!) Please use:");
-    console.log("    npx create-brix-theme myThemeName");
-    console.log("    npx create-brix-theme \"My Theme Name\"");
+    console.log(`(!) Please use:\n\tnpx create-brix-theme myThemeName\n\tnpx create-brix-theme "My Theme Name"`);
     process.exit(1);
   } else {
     return process.argv[2];
@@ -68,7 +70,7 @@ const getThemeName = () => {
 };
 
 // Returns the path to the newly generated theme
-const getThemePath = (str) => path.join(removeLastFolder(source), str)
+const getThemePath = (str) => path.join(removeLastFolder(source), str);
 
 // Returns Theme URI after basic formatting and validation
 const getThemeUri = () => {
@@ -154,7 +156,6 @@ const getThemeLicenseUri = () => {
 // Creates parent theme folder after basic formatting and validation
 const createThemeFolders = (name, dir) => {
   try {
-    console.log(dir);
     fs.mkdirSync(dir);
     fs.mkdirSync(dir + "-dev");
     process.chdir(dir);
@@ -184,7 +185,7 @@ const createConfig = (obj) => {
 const main = () => {
   // Setup brix-config
   source = process.cwd();
-  if(isUserInBrixFolder(source)) {
+  if (isUserInBrixFolder(source)) {
     brixConfig.themeName = getThemeName();
     const themePath = getThemePath(brixConfig.themeName);
     brixConfig.themeSlug = _.snakeCase(brixConfig.themeName);
@@ -198,18 +199,15 @@ const main = () => {
     brixConfig.themeRequiredPhp = getThemeRequiredPhp();
     brixConfig.themeLicenseName = getThemeLicenseName();
     brixConfig.themeLicenseUri = getThemeLicenseUri();
-   
+
     // Create Theme and dev folders
     createThemeFolders(brixConfig.themeName, themePath);
-  
+
     // Create brix-config
     createConfig(brixConfig);
-  
+
     // Create template files
-    createFile(
-      "style-rtl",
-      "css",
-      getStyleRtlCssCode(brixConfig));
+    createFile("style-rtl", "css", getStyleRtlCssCode(brixConfig));
     createFile("404", "php", get404PhpCode(brixConfig));
     createFile("archive", "php", getArchivePhpCode(brixConfig));
     createFile("comments", "php", getCommentsPhpCode(brixConfig));
@@ -221,10 +219,10 @@ const main = () => {
     createFile("search", "php", getSearchPhpCode(brixConfig));
     createFile("sidebar", "php", getSidebarPhpCode(brixConfig));
     createFile("single", "php", getSinglePhpCode(brixConfig));
-  
+
     fs.mkdirSync(process.cwd() + "/inc");
     process.chdir(process.cwd() + "/inc");
-  
+
     createFile("custom-header", "php", getCustomHeaderPhpCode(brixConfig));
     createFile("customizer", "php", getCustomizerPhpCode(brixConfig));
     createFile("jetpack", "php", getJetpackPhpCode(brixConfig));
@@ -234,13 +232,13 @@ const main = () => {
       getTemplateFunctionsPhpCode(brixConfig)
     );
     createFile("template-tags", "php", getTemplateTagsPhpCode(brixConfig));
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/js");
     process.chdir(process.cwd() + "/js");
     createFile("customizer", "js", getCustomizerJsCode(brixConfig));
     createFile("navigation", "js", getNavigationJsCode(brixConfig));
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/template-parts");
     process.chdir(process.cwd() + "/template-parts");
@@ -260,7 +258,7 @@ const main = () => {
       "php",
       getTemplatePartsContentSearchPhpCode(brixConfig)
     );
-  
+
     // Create dev files
     process.chdir("..");
     process.chdir("..");
@@ -271,23 +269,23 @@ const main = () => {
       { stdio: [0, 1, 2] }
     );
     createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));
-  
+
     fs.mkdirSync(process.cwd() + "/scss");
     process.chdir(process.cwd() + "/scss");
-  
+
     fs.mkdirSync(process.cwd() + "/abstracts");
     process.chdir(process.cwd() + "/abstracts");
     createFile("__abstracts-dir", "scss", getAbstractsDirScssCode(brixConfig));
     createFile("_fonts", "scss", getFontsScssCode(brixConfig));
     createFile("_variables", "scss", getVariablesScssCode(brixConfig));
     createFile("_mixins", "scss", getMixinsScssContent(brixConfig));
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/base");
     process.chdir(process.cwd() + "/base");
     createFile("__base-dir", "scss", getBaseDirScssContent(brixConfig));
     createFile("_typography", "scss", getTypographyScssContent(brixConfig));
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/components");
     process.chdir(process.cwd() + "/components");
@@ -296,29 +294,29 @@ const main = () => {
       "scss",
       getComponentsDirScssContent(brixConfig)
     );
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/layouts");
     process.chdir(process.cwd() + "/layouts");
     createFile("__layouts-dir", "scss", getLayoutsDirScssContent(brixConfig));
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/vendor");
     process.chdir(process.cwd() + "/vendor");
     createFile("__vendor-dir", "scss", getVendorDirScssCode(brixConfig));
-  
+
     process.chdir("..");
     createFile("_reset", "scss", getResetScssContent(brixConfig));
     createFile("styles", "scss", getStylesScssCode(brixConfig));
-  
+
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/js");
     process.chdir(process.cwd() + "/js");
-  
+
     // Next steps for user
-    console.log(
-      `\n\n'${brixConfig.themeName}' is ready. Try:\ncd "../${brixConfig.themeName}-dev" && gulp`
-    );
+    child_process.execSync(`cd "../${brixConfig.themeName}-dev" && gulp`, {
+      stdio: [0, 1, 2],
+    });
     return 0;
   }
   return 1;
