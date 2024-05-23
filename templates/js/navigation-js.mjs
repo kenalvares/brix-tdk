@@ -1,8 +1,8 @@
 /*
     navigation.js
 */
-const getNavigationJsCode = obj => {
-return `
+const getNavigationJsCode = (obj) => {
+  return `
 /**
  * File navigation.js.
  *
@@ -103,6 +103,6 @@ return `
 	}
 }() );
 `;
-}
+};
 
 export default getNavigationJsCode;

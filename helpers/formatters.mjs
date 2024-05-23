@@ -39,9 +39,9 @@ const isUserInBrixFolder = (path) => {
   }
   const lastSlashIndex = path.lastIndexOf("/");
   path = path.slice(lastSlashIndex, path.length);
-  if(path !== "/brix-tdk") {
+  if (path !== "/brix-tdk") {
     console.log("You must be in /brix-tdk");
-    return false
+    return false;
   }
   return true;
 };

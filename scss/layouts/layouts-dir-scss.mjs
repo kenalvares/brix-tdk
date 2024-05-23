@@ -1,10 +1,10 @@
-const getLayoutsDirScssContent = obj => {
-return `
+const getLayoutsDirScssContent = (obj) => {
+  return `
 /*
 Import Layout files
 */
 
 `;
-}
+};
 
 export default getLayoutsDirScssContent;

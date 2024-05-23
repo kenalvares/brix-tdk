@@ -62,7 +62,9 @@ import getGulpfileJsContent from "./templates/gulpfile-js.mjs"; // gulpfile.js
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 const getThemeName = () => {
   if (process.argv.length < 3 || process.argv.length > 3) {
-    console.log(`(!) Please use:\n\tnpx create-brix-theme myThemeName\n\tnpx create-brix-theme "My Theme Name"`);
+    console.log(
+      `(!) Please use:\n\tnpx create-brix-theme myThemeName\n\tnpx create-brix-theme "My Theme Name"`
+    );
     process.exit(1);
   } else {
     return process.argv[2];

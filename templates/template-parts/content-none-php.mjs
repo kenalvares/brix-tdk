@@ -1,8 +1,8 @@
 /*
     template-parts/content-none.php
 */
-const getTemplatePartsContentNonePhpCode = obj => {
-return `
+const getTemplatePartsContentNonePhpCode = (obj) => {
+  return `
 <?php
 /**
  * Template part for displaying a message that posts cannot be found
@@ -55,6 +55,6 @@ return `
 	</div><!-- .page-content -->
 </section><!-- .no-results -->
 `;
-}
+};
 
 export default getTemplatePartsContentNonePhpCode;

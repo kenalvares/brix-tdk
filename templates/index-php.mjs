@@ -1,8 +1,8 @@
 /*
     index.php
 */
-const getIndexPhpCode = obj => {
-return `
+const getIndexPhpCode = (obj) => {
+  return `
 <?php
 /**
  * The main template file
@@ -61,6 +61,6 @@ get_header();
 get_sidebar();
 get_footer();
 `;
-}
+};
 
 export default getIndexPhpCode;

@@ -1,8 +1,8 @@
 /*
     footer.php
 */
-const getFooterPhpCode = obj => {
-return `
+const getFooterPhpCode = (obj) => {
+  return `
 <?php
 /**
  * The template for displaying the footer
@@ -32,6 +32,6 @@ return `
 </body>
 </html>
 `;
-}
+};
 
 export default getFooterPhpCode;

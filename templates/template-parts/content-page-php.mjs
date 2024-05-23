@@ -1,8 +1,8 @@
 /*
     template-parts/content-page.php
 */
-const getTemplatePartsContentPagePhpCode = obj => {
-return `
+const getTemplatePartsContentPagePhpCode = (obj) => {
+  return `
 <?php
 /**
  * Template part for displaying page content in page.php
@@ -58,6 +58,6 @@ return `
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->
 `;
-}
+};
 
 export default getTemplatePartsContentPagePhpCode;

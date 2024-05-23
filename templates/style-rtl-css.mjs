@@ -1,8 +1,8 @@
 /*
     style-rtl.css
 */
-const getStyleRtlCssCode = obj => {
-return `
+const getStyleRtlCssCode = (obj) => {
+  return `
 /*
   Theme Name: ${obj.themeName}
   Theme URI: ${obj.themeUri}
@@ -957,6 +957,6 @@ textarea {
 	margin-bottom: 1.5em;
 }
 `;
-}
+};
 
 export default getStyleRtlCssCode;

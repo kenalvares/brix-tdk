@@ -1,9 +1,9 @@
-import gulp from 'gulp';
+import gulp from "gulp";
 const { series, parallel, src, dest, task } = gulp;
-import * as dartSass from 'sass';
-import gulpSass from 'gulp-sass';
-import concat from 'gulp-concat';
-import process from 'process';
+import * as dartSass from "sass";
+import gulpSass from "gulp-sass";
+import concat from "gulp-concat";
+import process from "process";
 const sass = gulpSass(dartSass);
 
 // function compileSass() {
@@ -23,8 +23,8 @@ const sass = gulpSass(dartSass);
 */
 
 function defaultTask(cb) {
-    // place code for your default task here
-    // compileSass();
-    cb();
-  }
-export default defaultTask
+  // place code for your default task here
+  // compileSass();
+  cb();
+}
+export default defaultTask;

@@ -1,5 +1,5 @@
-const getGulpfileJsContent = obj => {
-return `import gulp from "gulp";
+const getGulpfileJsContent = (obj) => {
+  return `import gulp from "gulp";
 const { series, parallel, src, dest, task } = gulp;
 import * as dartSass from "sass";
 import gulpSass from "gulp-sass";
@@ -40,6 +40,6 @@ function defaultTask(cb) {
 }
 export default defaultTask;
 `;
-}
+};
 
 export default getGulpfileJsContent;

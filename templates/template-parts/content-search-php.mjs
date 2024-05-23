@@ -1,8 +1,8 @@
 /*
     template-parts/content-search.php
 */
-const getTemplatePartsContentSearchPhpCode = obj => {
-return `
+const getTemplatePartsContentSearchPhpCode = (obj) => {
+  return `
 <?php
 /**
  * Template part for displaying results in search pages
@@ -39,6 +39,6 @@ return `
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
 `;
-}
+};
 
 export default getTemplatePartsContentSearchPhpCode;

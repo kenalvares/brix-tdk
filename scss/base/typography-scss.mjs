@@ -1,7 +1,7 @@
-const getTypographyScssContent = obj => {
-return `/*
+const getTypographyScssContent = (obj) => {
+  return `/*
 Typography
 */`;
-}
+};
 
 export default getTypographyScssContent;

@@ -1,5 +1,5 @@
-const getPackageJsonContent = obj => {
-return `
+const getPackageJsonContent = (obj) => {
+  return `
 {
   "name": "${obj.themeSlug}",
   "version": "${obj.themeVersion}",
@@ -13,6 +13,6 @@ return `
   "description": ""
 }
 `;
-}
+};
 
 export default getPackageJsonContent;

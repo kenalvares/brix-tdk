@@ -1,8 +1,8 @@
 /*
     customizer.js
 */
-const getCustomizerJsCode = obj => {
-return `
+const getCustomizerJsCode = (obj) => {
+  return `
 /* global wp, jQuery */
 /**
  * File customizer.js.
@@ -46,6 +46,6 @@ return `
 	} );
 }( jQuery ) );
 `;
-}
+};
 
 export default getCustomizerJsCode;

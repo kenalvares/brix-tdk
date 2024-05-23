@@ -1,8 +1,8 @@
 /*
     functions.php
 */
-const getFunctionsPhpCode = obj => {
-return `
+const getFunctionsPhpCode = (obj) => {
+  return `
 <?php
 /**
  * ${obj.themeName} functions and definitions
@@ -188,6 +188,6 @@ function ${obj.themeSlug}_setup() {
     require get_template_directory() . '/inc/woocommerce.php';
   }
 `;
-}
+};
 
 export default getFunctionsPhpCode;

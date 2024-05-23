@@ -1,5 +1,5 @@
-const getResetScssContent = obj => {
-return `/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+const getResetScssContent = (obj) => {
+  return `/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
   ========================================================================== */
@@ -910,6 +910,6 @@ textarea {
   margin-bottom: 1.5em;
 }
 `;
-}
+};
 
 export default getResetScssContent;

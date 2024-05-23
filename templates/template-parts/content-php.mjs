@@ -1,8 +1,8 @@
 /*
     template-parts/content.php
 */
-const getTemplatePartsContentPhpCode = obj => {
-return `
+const getTemplatePartsContentPhpCode = (obj) => {
+  return `
 <?php
 /**
  * Template part for displaying posts
@@ -67,6 +67,6 @@ return `
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
 `;
-}
+};
 
 export default getTemplatePartsContentPhpCode;

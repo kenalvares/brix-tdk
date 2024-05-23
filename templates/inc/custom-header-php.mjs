@@ -1,8 +1,8 @@
 /*
     custom-header.php
 */
-const getCustomHeaderPhpCode = obj => {
-return `
+const getCustomHeaderPhpCode = (obj) => {
+  return `
 <?php
 /**
  * Sample implementation of the Custom Header feature
@@ -82,6 +82,6 @@ if ( ! function_exists( '${obj.themeSlug}_header_style' ) ) :
 	}
 endif;
 `;
-}
+};
 
 export default getCustomHeaderPhpCode;

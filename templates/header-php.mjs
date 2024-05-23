@@ -1,8 +1,8 @@
 /*
     header.php
 */
-const getHeaderPhpCode = obj => {
-return `
+const getHeaderPhpCode = (obj) => {
+  return `
 <?php
 /**
  * This is the template that displays all of the <head> section and everything up until <div id="content">
@@ -61,6 +61,6 @@ return `
     </nav><!-- #site-navigation -->
 </header><!-- #masthead -->
 `;
-}
+};
 
 export default getHeaderPhpCode;

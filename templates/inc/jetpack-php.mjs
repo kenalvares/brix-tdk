@@ -1,8 +1,8 @@
 /*
     jetpack.php
 */
-const getJetpackPhpCode = obj => {
-return `
+const getJetpackPhpCode = (obj) => {
+  return `
 <?php
 /**
  * Jetpack Compatibility File
@@ -71,6 +71,6 @@ if ( ! function_exists( '${obj.themeSlug}_infinite_scroll_render' ) ) :
 	}
 endif;
 `;
-}
+};
 
 export default getJetpackPhpCode;

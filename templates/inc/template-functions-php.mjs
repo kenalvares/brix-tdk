@@ -1,8 +1,8 @@
 /*
     template-functions.php
 */
-const getTemplateFunctionsPhpCode = obj => {
-return `
+const getTemplateFunctionsPhpCode = (obj) => {
+  return `
 <?php
 /**
  * Functions which enhance the theme by hooking into WordPress
@@ -41,6 +41,6 @@ function ${obj.themeSlug}_pingback_header() {
 }
 add_action( 'wp_head', '${obj.themeSlug}_pingback_header' );
 `;
-}
+};
 
 export default getTemplateFunctionsPhpCode;

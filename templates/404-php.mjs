@@ -1,8 +1,8 @@
 /*
     404.php
 */
-const get404PhpCode = obj => {
-return `
+const get404PhpCode = (obj) => {
+  return `
 <?php
 /**
  * The template for displaying 404 pages (not found)
@@ -62,6 +62,6 @@ get_header();
 <?php
 get_footer();
 `;
-}
+};
 
 export default get404PhpCode;

@@ -1,8 +1,8 @@
 /*
     template-tags.php
 */
-const getTemplateTagsPhpCode = obj => {
-return `
+const getTemplateTagsPhpCode = (obj) => {
+  return `
 <?php
 /**
  * Custom template tags for this theme
@@ -169,6 +169,6 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	}
 endif;
 `;
-}
+};
 
 export default getTemplateTagsPhpCode;

@@ -1,8 +1,8 @@
 /*
     single.php
 */
-const getSinglePhpCode = obj => {
-return `
+const getSinglePhpCode = (obj) => {
+  return `
 <?php
 /**
  * The template for displaying all single posts
@@ -44,6 +44,6 @@ get_header();
 get_sidebar();
 get_footer();
 `;
-}
+};
 
 export default getSinglePhpCode;

@@ -1,5 +1,5 @@
-const getStylesScssCode = obj => {
-return `
+const getStylesScssCode = (obj) => {
+  return `
 @charset 'utf-8';
 
 /*
@@ -46,7 +46,7 @@ Components - This file is used to contain all component imports. Files inside th
 /*
 Layout - This file is used to contain all layout imports. Files inside this folder can contain specific element styles and layout. 
 */
-@use "layouts/__layouts-dir";`
-}
+@use "layouts/__layouts-dir";`;
+};
 
 export default getStylesScssCode;

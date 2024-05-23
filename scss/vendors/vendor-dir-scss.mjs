@@ -1,5 +1,5 @@
-const getVendorDirScssCode = obj => {
-return `
+const getVendorDirScssCode = (obj) => {
+  return `
 // @use "bourbon/bourbon";
 // @use "neat/neat";
 // @use "fontawesome/font-awesome";
@@ -9,6 +9,6 @@ Additonal Vendor Tools
 */
 
 `;
-}
+};
 
 export default getVendorDirScssCode;

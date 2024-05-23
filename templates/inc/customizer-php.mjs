@@ -1,8 +1,8 @@
 /*
     customizer.php
 */
-const getCustomizerPhpCode = obj => {
-return `
+const getCustomizerPhpCode = (obj) => {
+  return `
 <?php
 /**
  * ${obj.themeSlug} Theme Customizer
@@ -65,6 +65,6 @@ function ${obj.themeSlug}_customize_preview_js() {
 }
 add_action( 'customize_preview_init', '${obj.themeSlug}_customize_preview_js' );
 `;
-}
+};
 
 export default getCustomizerPhpCode;

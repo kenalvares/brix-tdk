@@ -1,8 +1,8 @@
 /*
     search.php
 */
-const getSearchPhpCode = obj => {
-return `
+const getSearchPhpCode = (obj) => {
+  return `
 <?php
 /**
  * The template for displaying search results pages
@@ -57,6 +57,6 @@ get_header();
 get_sidebar();
 get_footer();
 `;
-}
+};
 
 export default getSearchPhpCode;

@@ -1,10 +1,10 @@
-const getComponentsDirScssContent = obj => {
-return `
+const getComponentsDirScssContent = (obj) => {
+  return `
 /*
 Import Component files
 */
 
 `;
-}
+};
 
 export default getComponentsDirScssContent;

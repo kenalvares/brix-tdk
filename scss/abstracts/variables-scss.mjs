@@ -1,5 +1,5 @@
-const getVariablesScssCode = obj => {
-return `/*
+const getVariablesScssCode = (obj) => {
+  return `/*
 Variables
 */
 // Breakpoints
@@ -12,6 +12,6 @@ $large-breakpoint: 1200;
 
 
 `;
-}
+};
 
 export default getVariablesScssCode;
