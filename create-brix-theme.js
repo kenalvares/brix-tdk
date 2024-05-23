@@ -316,7 +316,8 @@ const main = () => {
     process.chdir(process.cwd() + "/js");
 
     // Next steps for user
-    child_process.execSync(`cd "../${brixConfig.themeName}-dev" && gulp`, {
+    console.log(process.cwd());
+    child_process.execSync(`cd .. && gulp`, {
       stdio: [0, 1, 2],
     });
     return 0;
