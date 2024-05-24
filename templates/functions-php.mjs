@@ -187,6 +187,28 @@ function ${obj.themeSlug}_setup() {
   if ( class_exists( 'WooCommerce' ) ) {
     require get_template_directory() . '/inc/woocommerce.php';
   }
+
+  /**
+   * Replace Custom Logo url with # if home page, and link to home if any other page
+   */
+  add_filter('get_custom_logo',  'custom_logo_url');
+  function custom_logo_url($html)
+  {
+    $custom_logo_id = get_theme_mod('custom_logo');
+    if (is_front_page() && is_home()) :
+      $url = "#";
+    else :
+      $url = get_home_url();
+    endif;
+    $html = sprintf(
+      '<a href="%1$s" class="custom-logo-link" rel="home" itemprop="url">%2$s</a>',
+      esc_url($url),
+      wp_get_attachment_image($custom_logo_id, 'full', false, array(
+        'class'    => 'custom-logo',
+      ))
+    );
+    return $html;
+  }
 `;
 };
 
