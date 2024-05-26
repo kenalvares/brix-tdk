@@ -45,8 +45,9 @@ import getTemplatePartsContentNonePhpCode from "./templates/template-parts/conte
 import getTemplatePartsContentPagePhpCode from "./templates/template-parts/content-page-php.mjs"; // template-parts/content-page.php
 import getTemplatePartsContentSearchPhpCode from "./templates/template-parts/content-search-php.mjs"; // template-parts/content-search.php
 
-import getComponentsHeaderDefaultPhpCode from "./components/headers/header-default.mjs"; //components/header-default.php
-import getComponentsHeaderCenteredPhpCode from "./components/headers/header-centered.mjs"; //components/header-centered.php
+import getComponentsHeaderDefaultPhpCode from "./components/headers/header-default-php.mjs"; //components/header-default.php
+import getComponentsHeaderCenteredPhpCode from "./components/headers/header-centered-php.mjs"; //components/header-centered.php
+import getComponentsHeaderCenteredScssCode from "./scss//components/header-centered-scss.mjs"; //components/header-centered.php
 
 import getStylesScssCode from "./scss/styles-scss.mjs"; // styles.scss
 import getVendorDirScssCode from "./scss/vendors/vendor-dir-scss.mjs"; // __vendor-dir.scss
@@ -305,6 +306,7 @@ const main = () => {
       "scss",
       getComponentsDirScssContent(brixConfig)
     );
+    createFile("_header-centered", "scss", getComponentsHeaderCenteredScssCode(brixConfig));
 
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/layouts");

@@ -87,6 +87,11 @@ Mixins
 //     font-size: 20px;
 //   }
 // }
+// Breakpoints
+$tablet-portrait-breakpoint: 600;
+$tablet-landscape-breakpoint: 768;
+$desktop-breakpoint: 992;
+$large-breakpoint: 1200;
 @mixin tablet-portrait {
     @media only screen and (min-width: $tablet-portrait-breakpoint * 1px) {
         @content;
