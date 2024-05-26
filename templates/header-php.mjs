@@ -28,7 +28,7 @@ const getHeaderPhpCode = (obj) => {
 <div id="page" class="site">
 <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', '${obj.themeSlug}' ); ?></a>
 
-<?php require get_template_directory() . "/components/header-default.php" ?>`;
+<?php require get_template_directory() . "/components/header-component.php" ?>`;
 };
 
 export default getHeaderPhpCode;

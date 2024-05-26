@@ -37,6 +37,8 @@ import getJetpackPhpCode from "./templates/inc/jetpack-php.mjs"; // jetpack.php
 import getTemplateFunctionsPhpCode from "./templates/inc/template-functions-php.mjs"; // template-functions.php
 import getTemplateTagsPhpCode from "./templates/inc/template-tags-php.mjs"; // template-tags.php
 
+import getComponentsHeaderComponentPhpCode from "./components/headers/header-component-php.mjs"; //components/headers/header-component.php
+
 import getCustomizerJsCode from "./templates/js/customizer-js.mjs"; // customizer.js
 import getNavigationJsCode from "./templates/js/navigation-js.mjs"; // navigation.js
 
@@ -45,9 +47,9 @@ import getTemplatePartsContentNonePhpCode from "./templates/template-parts/conte
 import getTemplatePartsContentPagePhpCode from "./templates/template-parts/content-page-php.mjs"; // template-parts/content-page.php
 import getTemplatePartsContentSearchPhpCode from "./templates/template-parts/content-search-php.mjs"; // template-parts/content-search.php
 
-import getComponentsHeaderDefaultPhpCode from "./components/headers/header-default-php.mjs"; //components/header-default.php
-import getComponentsHeaderCenteredPhpCode from "./components/headers/header-centered-php.mjs"; //components/header-centered.php
-import getComponentsHeaderCenteredScssCode from "./scss//components/header-centered-scss.mjs"; //components/header-centered.php
+import getComponentsHeaderDefaultPhpCode from "./components/headers/header-default-php.mjs"; // components/headers/header-default.php
+import getComponentsHeaderCenteredPhpCode from "./components/headers/header-centered-php.mjs"; // components/headers/header-centered.php
+import getComponentsHeaderCenteredScssCode from "./scss//components/header-centered-scss.mjs"; // scss/components/_header-centered.scss
 
 import getStylesScssCode from "./scss/styles-scss.mjs"; // styles.scss
 import getVendorDirScssCode from "./scss/vendors/vendor-dir-scss.mjs"; // __vendor-dir.scss
@@ -62,6 +64,7 @@ import getComponentsDirScssContent from "./scss/components/components-dir-scss.m
 import getLayoutsDirScssContent from "./scss/layouts/layouts-dir-scss.mjs"; // __layouts-dir.scss
 import getPackageJsonContent from "./templates/package-json.mjs"; // package.json
 import getGulpfileJsContent from "./templates/gulpfile-js.mjs"; // gulpfile.js
+import getCreateBrixComponentJsCode from "./templates/create-brix-component-js.mjs"; //create-brix-component.js
 
 // Returns the name of the project entered when typing `npx create-brix-theme <project-name>`
 const getThemeName = () => {
@@ -209,9 +212,6 @@ const main = () => {
     // Create Theme and dev folders
     createThemeFolders(brixConfig.themeName, themePath);
 
-    // Create brix-config
-    createConfig(brixConfig);
-
     // Create template files
     createFile("style-rtl", "css", getStyleRtlCssCode(brixConfig));
     createFile("404", "php", get404PhpCode(brixConfig));
@@ -265,16 +265,26 @@ const main = () => {
       getTemplatePartsContentSearchPhpCode(brixConfig)
     );
 
+    process.chdir("..");
+    fs.mkdirSync(process.cwd() + "/components");
+    process.chdir(process.cwd() + "/components");
+    createFile("header-component", "php", getComponentsHeaderComponentPhpCode(brixConfig));
+
     // Create dev files
     process.chdir("..");
     process.chdir("..");
     process.chdir(process.cwd() + "/" + brixConfig.themeName + "-dev");
+
+    // Create brix-config
+    createConfig(brixConfig);
+
     createFile("package", "json", getPackageJsonContent(brixConfig));
     child_process.execSync(
-      "npm install --save-dev gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
+      "npm install --save-dev path fs prompt-sync gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
       { stdio: [0, 1, 2] }
     );
     createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));
+    createFile("create-brix-component", "js", getCreateBrixComponentJsCode(brixConfig));
 
     fs.mkdirSync(process.cwd() + "/scss");
     process.chdir(process.cwd() + "/scss");
@@ -321,6 +331,8 @@ const main = () => {
 
     fs.mkdirSync(process.cwd() + "/components");
     process.chdir(process.cwd() + "/components");
+    fs.mkdirSync(process.cwd() + "/headers");
+    process.chdir(process.cwd() + "/headers");
     createFile("header-default", "php", getComponentsHeaderDefaultPhpCode(brixConfig));
     createFile("header-centered", "php", getComponentsHeaderCenteredPhpCode(brixConfig));
 
