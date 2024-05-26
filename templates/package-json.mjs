@@ -8,6 +8,9 @@ const getPackageJsonContent = (obj) => {
   "scripts": {
     "test": "echo \\"Error: no test specified\\" && exit 1"
   },
+  "bin": {
+    "create-brix-component": "./create-brix-component.js"
+  },
   "author": "${obj.themeAuthorName}",
   "license": "${obj.themeLicenseName}",
   "description": ""

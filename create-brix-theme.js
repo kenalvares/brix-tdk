@@ -265,12 +265,6 @@ const main = () => {
       getTemplatePartsContentSearchPhpCode(brixConfig)
     );
 
-    process.chdir("..");
-    fs.mkdirSync(process.cwd() + "/components");
-    process.chdir(process.cwd() + "/components");
-    createFile("header-default", "php", getComponentsHeaderDefaultPhpCode(brixConfig));
-    createFile("header-centered", "php", getComponentsHeaderCenteredPhpCode(brixConfig));
-
     // Create dev files
     process.chdir("..");
     process.chdir("..");
@@ -324,7 +318,11 @@ const main = () => {
 
     process.chdir("..");
     fs.mkdirSync(process.cwd() + "/js");
-    process.chdir(process.cwd() + "/js");
+
+    fs.mkdirSync(process.cwd() + "/components");
+    process.chdir(process.cwd() + "/components");
+    createFile("header-default", "php", getComponentsHeaderDefaultPhpCode(brixConfig));
+    createFile("header-centered", "php", getComponentsHeaderCenteredPhpCode(brixConfig));
 
     // Next steps for user
     console.log(process.cwd());
