@@ -147,6 +147,10 @@ function ${obj.themeSlug}_setup() {
     wp_style_add_data( '${obj.themeSlug}-style', 'rtl', 'replace' );
   
     wp_enqueue_script( '${obj.themeSlug}-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _BRIX_VERSION, true );
+    
+  wp_enqueue_script('${obj.themeSlug}-customjs', get_template_directory_uri() . '/js/all.js', array(), _BRIX_VERSION, true);
+    
+    wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/f5e8a860a9.js', array(), _BRIX_VERSION, false); // Add FontAwesome
   
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
       wp_enqueue_script( 'comment-reply' );
