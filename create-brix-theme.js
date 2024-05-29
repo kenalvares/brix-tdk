@@ -280,7 +280,7 @@ const main = () => {
 
     createFile("package", "json", getPackageJsonContent(brixConfig));
     child_process.execSync(
-      "npm install --save-dev path fs prompt-sync gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
+      "npm install --save-dev path fs child_process prompt-sync gulp sass gulp-sass gulp-concat process gulp-babel gulp-uglify gulp-autoprefixer gulp-group-css-media-queries",
       { stdio: [0, 1, 2] }
     );
     createFile("gulpfile", "js", getGulpfileJsContent(brixConfig));

@@ -3,11 +3,6 @@ const getComponentsDirScssContent = (obj) => {
 /*
 Import Component files
 */
-
-/*
-Headers
-*/
-// @use "header-centered"
 `;
 };
 
