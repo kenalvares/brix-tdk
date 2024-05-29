@@ -1,7 +1,5 @@
 const getComponentsHeaderComponentPhpCode = (obj) => {
-    return `<?php
-    echo "Test";
-    ?>`;
+    return "";
 }
 
 export default getComponentsHeaderComponentPhpCode;
